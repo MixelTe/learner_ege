@@ -12,4 +12,4 @@ const keys = [
 ];
 export const Keys = {};
 for (const key of keys)
-    Keys[key] = "learner-" + key;
+    Keys[key] = "learner_ege-" + key;
