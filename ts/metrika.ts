@@ -19,7 +19,7 @@ declare global
 	}): void
 }
 
-const code = 96188813;
+const code = 96354999;
 
 export function metrika_pageSwitch(prevPage: string, page: string, title: string)
 {
