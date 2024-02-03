@@ -14,4 +14,4 @@ const keys = [
 export const Keys = {} as { [key in (typeof keys)[number]]: string };
 
 for (const key of keys)
-	Keys[key] = "learner-" + key;
+	Keys[key] = "learner_ege-" + key;
