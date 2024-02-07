@@ -53,7 +53,7 @@
 	<div id="beforeload"></div>
 	<script>
 		{
-			const theme = localStorage.getItem("learner-theme") || "auto";
+			const theme = localStorage.getItem("learner_ege-theme") || "auto";
 			const dark = theme == "dark" || (theme == "auto" && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
 			document.getElementById("beforeload").style.backgroundColor = dark ? "#100c05" : "#f1e6d1";
 		}
