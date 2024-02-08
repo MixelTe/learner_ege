@@ -20,7 +20,7 @@ export const Sections: Section[] = [
 			{ id: "ru_12", count: 7, name: "№12 Пра­во­пи­са­ние глаголов", color: themes.blue, items: getItemLoader("ru_12") },
 			{ id: "ru_12p", count: 0, name: "№12 Практика", color: themes.blue, items: getItemLoader("ru_12p"), onlyAnswerInQList: true },
 			{ id: "ru_13", count: 10, name: "№13 Правописание НЕ", color: themes.blue, items: getItemLoader("ru_13") },
-			// { id: "ru_13p", count: 0, name: "№13 Практика", color: themes.blue, items: getItemLoader("ru_13p"), onlyAnswerInQList: true },
+			{ id: "ru_13p", count: 0, name: "№13 Практика", color: themes.blue, items: getItemLoader("ru_13p"), onlyAnswerInQList: true },
 			{ id: "ru_14", count: 86, name: "№14 Слитно, дефис или раздельно", color: themes.blue, items: getItemLoader("ru_14") },
 			{ id: "ru_15", count: 3, name: "№15 Н и НН в суффиксах", color: themes.blue, items: getItemLoader("ru_15") },
 			// { id: "ru_15p", count: 0, name: "№15 Практика", color: themes.blue, items: getItemLoader("ru_15p"), onlyAnswerInQList: true },
