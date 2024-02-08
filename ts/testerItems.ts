@@ -456,7 +456,7 @@ export class TestItemChooseWord extends TestItem
 export class TestItemMultipleWordChoice extends TestItem
 {
 	private parts: { s: string, a: string, q: boolean, r: boolean, selected?: boolean }[] = [];
-	constructor(id: number, task: string, private title: string)
+	constructor(id: number, task: string, private title: string, private hideWrong = false)
 	{
 		super(id);
 		let w = "";
@@ -499,6 +499,8 @@ export class TestItemMultipleWordChoice extends TestItem
 			}
 		}
 		this.parts.push({ s: w, a: w, q, r });
+		if (this.parts.length == 1)
+			console.error(`TestItemMultipleWordChoice[${id}] task dont have choices: ${task}`);
 	}
 
 	public getQuestion(): string | Node
@@ -508,7 +510,7 @@ export class TestItemMultipleWordChoice extends TestItem
 
 	public getAnswer(): string | Node
 	{
-		return this.parts.filter(v => v.r).map(v => v.s).join("");
+		return this.parts.map(v => v.a).join("");
 	}
 
 	public async show(taskEl: HTMLDivElement, inputEl: HTMLDivElement, onAnswer: (r: boolean) => void)
@@ -558,7 +560,10 @@ export class TestItemMultipleWordChoice extends TestItem
 					if (part.selected)
 						el.classList.add("tester-multipleWordChoice-btn_wrong")
 					else
-						el.classList.add("tester-multipleWordChoice-btn_hidden")
+						if (this.hideWrong)
+							el.classList.add("tester-multipleWordChoice-btn_hidden")
+						else
+							el.classList.add("tester-multipleWordChoice-btn_disabled")
 
 				correct = correct && (part.r && !!part.selected || !part.r && !part.selected);
 			}
