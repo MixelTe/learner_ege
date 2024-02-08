@@ -23,7 +23,7 @@ export const Sections: Section[] = [
 			{ id: "ru_13p", count: 0, name: "№13 Практика", color: themes.blue, items: getItemLoader("ru_13p"), onlyAnswerInQList: true },
 			{ id: "ru_14", count: 86, name: "№14 Слитно, дефис или раздельно", color: themes.blue, items: getItemLoader("ru_14") },
 			{ id: "ru_15", count: 3, name: "№15 Н и НН в суффиксах", color: themes.blue, items: getItemLoader("ru_15") },
-			// { id: "ru_15p", count: 0, name: "№15 Практика", color: themes.blue, items: getItemLoader("ru_15p"), onlyAnswerInQList: true },
+			{ id: "ru_15p", count: 0, name: "№15 Практика", color: themes.blue, items: getItemLoader("ru_15p"), onlyAnswerInQList: true },
 			{ id: "ru_16", count: 4, name: "№16-20 Пунктуация", color: themes.blue, items: getItemLoader("ru_16") },
 			// { id: "ru_17p", count: 0, name: "№17 Практика", color: themes.blue, items: getItemLoader("ru_17p") },
 			// { id: "ru_18p", count: 0, name: "№18 Практика", color: themes.blue, items: getItemLoader("ru_18p") },
