@@ -52,7 +52,10 @@ export class Tester {
         const text = `Результат: ${this.cor}/${this.items.length} (${Math.floor(this.cor / this.items.length * 100)}%)`;
         Lib.SetContent(taskEl, Lib.initEl("h2", [], text));
         Lib.SetContent(inputEl, Lib.Div("tester-input-two", [
-            Lib.Button([], "Вернуться", runAfterAdv(() => switchPage("main"))),
+            Lib.Button([], "Вернуться", btn => {
+                btn.classList.add("active");
+                runAfterAdv(() => switchPage("main"));
+            }),
             Lib.Button([], "Ещё раз", async (btn) => {
                 btn.classList.add("active");
                 if (!isAnimDisabled())
@@ -79,7 +82,7 @@ function runAfterAdv(f) {
         if (isNaN(completeCount))
             completeCount = 0;
         const lessAdv = localStorage.getItem(Keys.lessAdv) == "1";
-        const reqCount = lessAdv ? 3 : 1;
+        const reqCount = lessAdv ? 4 : 2;
         completeCount++;
         let show = false;
         if (completeCount >= reqCount) {
