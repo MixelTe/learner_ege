@@ -2,8 +2,9 @@ import * as Lib from "./littleLib.js";
 import { switchPage } from "./pages/switchPage.js";
 import { Trainer } from "./trainer.js";
 import { confetti } from "./confetti.js";
-import { metrika_event } from "./metrika.js";
+import { metrika_event, showAdvFullscreen } from "./metrika.js";
 import { isAnimDisabled } from "./pages/settings.js";
+import { Keys } from "./keys.js";
 const pageEl = Lib.get.div("t-page");
 const idEl = Lib.get.div("t-id");
 const taskEl = Lib.get.div("t-task");
@@ -51,12 +52,12 @@ export class Tester {
         const text = `Результат: ${this.cor}/${this.items.length} (${Math.floor(this.cor / this.items.length * 100)}%)`;
         Lib.SetContent(taskEl, Lib.initEl("h2", [], text));
         Lib.SetContent(inputEl, Lib.Div("tester-input-two", [
-            Lib.Button([], "Вернуться", () => switchPage("main")),
+            Lib.Button([], "Вернуться", runAfterAdv(() => switchPage("main"))),
             Lib.Button([], "Ещё раз", async (btn) => {
                 btn.classList.add("active");
                 if (!isAnimDisabled())
                     await Lib.wait(200);
-                new Tester(this.theme).start();
+                runAfterAdv(() => new Tester(this.theme).start())();
             }),
         ]));
         if (this.cor == this.items.length) {
@@ -71,6 +72,26 @@ export class Tester {
         }
         metrika_event("tester_done");
     }
+}
+function runAfterAdv(f) {
+    return () => {
+        let completeCount = parseInt(localStorage.getItem(Keys.completeCount) || "0", 10);
+        if (isNaN(completeCount))
+            completeCount = 0;
+        const lessAdv = localStorage.getItem(Keys.lessAdv) == "1";
+        const reqCount = lessAdv ? 5 : 3;
+        completeCount++;
+        let show = false;
+        if (completeCount >= reqCount) {
+            completeCount = 0;
+            show = true;
+        }
+        localStorage.setItem(Keys.completeCount, `${completeCount}`);
+        if (show)
+            showAdvFullscreen(f);
+        else
+            f();
+    };
 }
 export class TestItem {
     id;

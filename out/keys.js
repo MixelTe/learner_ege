@@ -9,6 +9,8 @@ const keys = [
     "animDisable",
     "customTheme",
     "customColors",
+    "completeCount",
+    "lessAdv",
 ];
 export const Keys = {};
 for (const key of keys)
