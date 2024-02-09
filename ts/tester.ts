@@ -114,10 +114,8 @@ function runAfterAdv(f: () => void)
 		}
 		localStorage.setItem(Keys.completeCount, `${completeCount}`);
 
-		if (show)
-			showAdvFullscreen(f);
-		else
-			f();
+		if (show) showAdvFullscreen();
+		f();
 	};
 }
 
