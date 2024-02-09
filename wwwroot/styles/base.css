@@ -138,6 +138,9 @@ header {
 	opacity: 1;
 	pointer-events: all;
 }
+.menu.instant {
+	transition: none;
+}
 
 .menu > * {
 	grid-column: 2/3;

@@ -19,7 +19,7 @@ Lib.addButtonListener("menuBtn", () =>
 {
 	if (menuOpen)
 	{
-		closeMenu();
+		closeMenu(false);
 		history.back();
 	}
 	else
@@ -28,7 +28,7 @@ Lib.addButtonListener("menuBtn", () =>
 window.addEventListener("popstate", e =>
 {
 	if (menuOpen)
-		closeMenu()
+		closeMenu(false)
 });
 
 function openMenu()
@@ -41,9 +41,14 @@ function openMenu()
 	icons.forEach(icon => icon.style.display = "none");
 	Lib.random.choose(icons).style.display = "block";
 }
-function closeMenu()
+function closeMenu(instant = true)
 {
 	menuOpen = false;
+	if (instant)
+	{
+		menu.classList.add("instant");
+		setTimeout(() => menu.classList.remove("instant"), 100);
+	}
 	menu.classList.remove("open");
 }
 Lib.addButtonListener("btn-index", () => switchPage("main", "", themes.common, closeMenu));
