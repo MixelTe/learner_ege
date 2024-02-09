@@ -1,5 +1,5 @@
 import * as Lib from "../littleLib.js";
-import { metrika_pageSwitch } from "../metrika.js";
+import { enableBottomAdv, metrika_pageSwitch } from "../metrika.js";
 import { currentTheme, setTheme, setThemeColors, themes } from "../themes.js";
 import { isAnimDisabled } from "./settings.js";
 const pages = {
@@ -34,6 +34,7 @@ export async function switchPage(page, title = "", theme = themes.common, onSwit
         return;
     const documentTitle = typeof title == "string" ? (title == "" ? "ЛЯРО" : "ЛЯРО | " + title) : "ЛЯРО" + title.title;
     title = typeof title == "string" ? title : title.display;
+    enableBottomAdv();
     metrika_pageSwitch(prevPage, pageTitle, documentTitle);
     prevPage = pageTitle;
     if (instant || isAnimDisabled()) {

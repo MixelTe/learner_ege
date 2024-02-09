@@ -35,3 +35,16 @@ function saveCall(f) {
         console.error(e);
     }
 }
+let bottomAdvEnabled = false;
+export function enableBottomAdv() {
+    if (bottomAdvEnabled)
+        return;
+    bottomAdvEnabled = true;
+    const theme = localStorage.getItem(Keys.theme) || "auto";
+    const dark = theme != "auto" ? theme == "dark" : window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+    Ya.Context.AdvManager.render({
+        "blockId": "R-A-5910277-1",
+        "renderTo": "yandex_rtb_R-A-5910277-1",
+        darkTheme: dark,
+    });
+}
