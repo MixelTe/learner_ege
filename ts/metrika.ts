@@ -30,6 +30,7 @@ declare global
 						platform?: string,
 						onClose?: () => void,
 						onRewarded?: (isRewarded: boolean) => void,
+						onError?: (data: any) => void,
 						darkTheme: boolean,
 					}) => void,
 					getPlatform: () => string,
@@ -89,57 +90,97 @@ function saveCall(f: () => void)
 	catch (e) { console.error(e); }
 }
 
+function tryCall(f: () => void, ef?: () => void)
+{
+	if (!Object.hasOwn(window, "Ya") || !Ya?.Context?.AdvManager?.render)
+	{
+		console.error("adv is undefined");
+		return;
+	}
+	try { f(); }
+	catch (e) { console.error(e); ef?.() }
+}
+
 let bottomAdvEnabled = false;
 export function enableBottomAdv()
 {
 	if (bottomAdvEnabled) return;
 	bottomAdvEnabled = true;
 
-	Ya.Context.AdvManager.render({
-		"blockId": "R-A-5910277-1",
-		"renderTo": "yandex_rtb_R-A-5910277-1",
-		darkTheme: isDarkTheme(),
-	})
+	tryCall(() =>
+		Ya.Context.AdvManager.render({
+			"blockId": "R-A-5910277-1",
+			"renderTo": "yandex_rtb_R-A-5910277-1",
+			darkTheme: isDarkTheme(),
+			onError: console.log,
+		})
+	);
 }
 
 export function showAdvFullscreen(onClose?: () => void)
 {
-	if (Ya.Context.AdvManager.getPlatform() === "desktop")
-		Ya.Context.AdvManager.render({
-			"blockId": "R-A-5910277-2",
-			"type": "fullscreen",
-			"platform": "desktop",
-			darkTheme: isDarkTheme(),
-			onClose,
-		});
-	else
-		Ya.Context.AdvManager.render({
-			"blockId": "R-A-5910277-4",
-			"type": "fullscreen",
-			"platform": "touch",
-			darkTheme: isDarkTheme(),
-			onClose,
-		});
+	tryCall(() =>
+	{
+		if (Ya.Context.AdvManager.getPlatform() === "desktop")
+			Ya.Context.AdvManager.render({
+				"blockId": "R-A-5910277-2",
+				"type": "fullscreen",
+				"platform": "desktop",
+				darkTheme: isDarkTheme(),
+				onError: data =>
+				{
+					console.log(data);
+					onClose?.();
+				},
+				onClose,
+			});
+		else
+			Ya.Context.AdvManager.render({
+				"blockId": "R-A-5910277-4",
+				"type": "fullscreen",
+				"platform": "touch",
+				darkTheme: isDarkTheme(),
+				onError: data =>
+				{
+					console.log(data);
+					onClose?.();
+				},
+				onClose,
+			});
+	}, onClose);
 }
 
-export function showAdvRewarded(onRewarded?: (isRewarded: boolean) => void)
+export function showAdvRewarded(onRewarded: (isRewarded: boolean) => void)
 {
-	if (Ya.Context.AdvManager.getPlatform() === "desktop")
-		Ya.Context.AdvManager.render({
-			"blockId": "R-A-5910277-3",
-			"type": "rewarded",
-			"platform": "desktop",
-			darkTheme: isDarkTheme(),
-			onRewarded,
-		});
-	else
-		Ya.Context.AdvManager.render({
-			"blockId": "R-A-5910277-5",
-			"type": "rewarded",
-			"platform": "touch",
-			darkTheme: isDarkTheme(),
-			onRewarded,
-		});
+	tryCall(() =>
+	{
+		if (Ya.Context.AdvManager.getPlatform() === "desktop")
+			Ya.Context.AdvManager.render({
+				"blockId": "R-A-5910277-3",
+				"type": "rewarded",
+				"platform": "desktop",
+				darkTheme: isDarkTheme(),
+				onError: data =>
+				{
+					console.log(data);
+					onRewarded(false);
+				},
+				onRewarded,
+			});
+		else
+			Ya.Context.AdvManager.render({
+				"blockId": "R-A-5910277-5",
+				"type": "rewarded",
+				"platform": "touch",
+				darkTheme: isDarkTheme(),
+				onError: data =>
+				{
+					console.log(data);
+					onRewarded(false);
+				},
+				onRewarded,
+			});
+	}, () => onRewarded(false));
 }
 
 function isDarkTheme()

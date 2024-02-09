@@ -1,7 +1,7 @@
 import * as Lib from "../littleLib.js";
 import { enableBottomAdv, metrika_pageSwitch } from "../metrika.js";
 import { ThemeColors, Themes, currentTheme, setTheme, setThemeColors, themes } from "../themes.js";
-import { isAnimDisabled } from "./settings.js";
+import { checkCustomTheme, isAnimDisabled } from "./settings.js";
 
 export type Page = "main" | "tester" | "stats" | "qlists" | "qlist" | "dayStats" | "about" | "settings";
 const pages = {
@@ -39,7 +39,6 @@ export async function switchPage(page: Page | { page: Page, title: string }, tit
 	const documentTitle = typeof title == "string" ? (title == "" ? "ЛЯРО" : "ЛЯРО | " + title) : "ЛЯРО" + title.title;
 	title = typeof title == "string" ? title : title.display;
 
-	enableBottomAdv();
 	metrika_pageSwitch(prevPage, pageTitle, documentTitle)
 	prevPage = pageTitle;
 
@@ -52,6 +51,8 @@ export async function switchPage(page: Page | { page: Page, title: string }, tit
 		setThemeColors(themeColors[theme]);
 		pages[curPage].classList.add("open");
 		onSwitch();
+		enableBottomAdv();
+		checkCustomTheme();
 		if (!dontPushState)
 			if (history.state?.back)
 				history.replaceState({ page, title, theme, curSessionKey }, "");
@@ -79,6 +80,8 @@ export async function switchPage(page: Page | { page: Page, title: string }, tit
 	subtitleEl.innerText = subtitle;
 	pages[curPage].classList.add("open");
 	onSwitch();
+	enableBottomAdv();
+	checkCustomTheme();
 	if (!dontPushState)
 		if (history.state?.back)
 			history.replaceState({ page, title, theme, curSessionKey }, "");

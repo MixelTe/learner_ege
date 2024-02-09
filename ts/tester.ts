@@ -99,7 +99,7 @@ function runAfterAdv(f: () => void)
 		let completeCount = parseInt(localStorage.getItem(Keys.completeCount) || "0", 10);
 		if (isNaN(completeCount)) completeCount = 0;
 		const lessAdv = localStorage.getItem(Keys.lessAdv) == "1";
-		const reqCount = lessAdv ? 5 : 3;
+		const reqCount = lessAdv ? 3 : 1;
 
 		completeCount++;
 		let show = false;
