@@ -254,6 +254,9 @@ header {
 :has(#p-about.open) #btn-about {
 	opacity: 0;
 }
+:has(#p-settings.open) #btn-settings {
+	opacity: 0;
+}
 
 .menu footer {
 	display: flex;

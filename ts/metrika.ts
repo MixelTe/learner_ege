@@ -112,7 +112,11 @@ export function enableBottomAdv()
 			"blockId": "R-A-5910277-1",
 			"renderTo": "yandex_rtb_R-A-5910277-1",
 			darkTheme: isDarkTheme(),
-			onError: console.log,
+			onError: data =>
+			{
+				bottomAdvEnabled = false;
+				console.log(data);
+			},
 		})
 	);
 }
