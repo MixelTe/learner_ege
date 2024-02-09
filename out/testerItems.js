@@ -362,10 +362,12 @@ export class TestItemChooseWord extends TestItem {
 }
 export class TestItemMultipleWordChoice extends TestItem {
     title;
+    hideWrong;
     parts = [];
-    constructor(id, task, title) {
+    constructor(id, task, title, hideWrong = false) {
         super(id);
         this.title = title;
+        this.hideWrong = hideWrong;
         let w = "";
         let s = "";
         let q = false;
@@ -401,12 +403,16 @@ export class TestItemMultipleWordChoice extends TestItem {
             }
         }
         this.parts.push({ s: w, a: w, q, r });
+        if (this.parts.length == 1)
+            console.error(`TestItemMultipleWordChoice[${id}] task dont have choices: ${task}`);
     }
     getQuestion() {
         return this.parts.map(v => v.s).join("");
     }
-    getAnswer() {
-        return this.parts.filter(v => v.r).map(v => v.s).join("");
+    getAnswer(onlyAnswer = false) {
+        if (onlyAnswer)
+            return this.parts.filter(v => v.r).map(v => v.s).join("");
+        return this.parts.map(v => v.a).join("");
     }
     async show(taskEl, inputEl, onAnswer) {
         this.parts.forEach(v => v.selected = false);
@@ -421,7 +427,7 @@ export class TestItemMultipleWordChoice extends TestItem {
                 btn.classList.toggle("tester-multipleWordChoice-btn_selected", selected);
                 Lib.SetContent(selectedEl, this.parts.filter(v => v.selected).map(v => Lib.Span([], v.s)));
             }));
-        const answ = Lib.Div(["tester-collapsible", "tester-collapsible_noMargin", "tester-collapsible_collapsed"], Lib.Span([], "Ответ: " + this.getAnswer()));
+        const answ = Lib.Div(["tester-collapsible", "tester-collapsible_noMargin", "tester-collapsible_collapsed"], Lib.Span([], "Ответ: " + this.getAnswer(true)));
         const task = Lib.Div("tester-multipleWordChoice", els);
         const selectedEl = Lib.Span("tester-multipleWordChoice-selected");
         Lib.SetContent(taskEl, [
@@ -448,8 +454,10 @@ export class TestItemMultipleWordChoice extends TestItem {
                     el.classList.add("tester-multipleWordChoice-btn_correct");
                 else if (part.selected)
                     el.classList.add("tester-multipleWordChoice-btn_wrong");
-                else
+                else if (this.hideWrong)
                     el.classList.add("tester-multipleWordChoice-btn_hidden");
+                else
+                    el.classList.add("tester-multipleWordChoice-btn_disabled");
                 correct = correct && (part.r && !!part.selected || !part.r && !part.selected);
             }
             btn.innerText = "Далее";

@@ -14,7 +14,7 @@ const btnAbout = Lib.get.button("btn-about");
 let menuOpen = false;
 Lib.addButtonListener("menuBtn", () => {
     if (menuOpen) {
-        closeMenu();
+        closeMenu(false);
         history.back();
     }
     else
@@ -22,7 +22,7 @@ Lib.addButtonListener("menuBtn", () => {
 });
 window.addEventListener("popstate", e => {
     if (menuOpen)
-        closeMenu();
+        closeMenu(false);
 });
 function openMenu() {
     menuOpen = true;
@@ -32,8 +32,12 @@ function openMenu() {
     icons.forEach(icon => icon.style.display = "none");
     Lib.random.choose(icons).style.display = "block";
 }
-function closeMenu() {
+function closeMenu(instant = true) {
     menuOpen = false;
+    if (instant) {
+        menu.classList.add("instant");
+        setTimeout(() => menu.classList.remove("instant"), 100);
+    }
     menu.classList.remove("open");
 }
 Lib.addButtonListener("btn-index", () => switchPage("main", "", themes.common, closeMenu));
@@ -49,7 +53,7 @@ initMainPage();
 // showDayStats();
 // showAbout();
 // showSettings();
-// new Tester(Sections[0].themes[15]).start();
+// new Tester(Sections[0].themes[23]).start();
 async function initMainPage() {
     history.pushState({ page: "main", title: "", theme: themes.common, curSessionKey }, "");
     const sections = Lib.get.div("sections");
