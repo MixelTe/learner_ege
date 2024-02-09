@@ -1,7 +1,7 @@
 import * as Lib from "../littleLib.js";
 import { enableBottomAdv, metrika_pageSwitch } from "../metrika.js";
 import { currentTheme, setTheme, setThemeColors, themes } from "../themes.js";
-import { isAnimDisabled } from "./settings.js";
+import { checkCustomTheme, isAnimDisabled } from "./settings.js";
 const pages = {
     main: Lib.get.div("p-start"),
     tester: Lib.get.div("p-tester"),
@@ -34,7 +34,6 @@ export async function switchPage(page, title = "", theme = themes.common, onSwit
         return;
     const documentTitle = typeof title == "string" ? (title == "" ? "ЛЯРО" : "ЛЯРО | " + title) : "ЛЯРО" + title.title;
     title = typeof title == "string" ? title : title.display;
-    enableBottomAdv();
     metrika_pageSwitch(prevPage, pageTitle, documentTitle);
     prevPage = pageTitle;
     if (instant || isAnimDisabled()) {
@@ -45,6 +44,8 @@ export async function switchPage(page, title = "", theme = themes.common, onSwit
         setThemeColors(themeColors[theme]);
         pages[curPage].classList.add("open");
         onSwitch();
+        enableBottomAdv();
+        checkCustomTheme();
         if (!dontPushState)
             if (history.state?.back)
                 history.replaceState({ page, title, theme, curSessionKey }, "");
@@ -71,6 +72,8 @@ export async function switchPage(page, title = "", theme = themes.common, onSwit
     subtitleEl.innerText = subtitle;
     pages[curPage].classList.add("open");
     onSwitch();
+    enableBottomAdv();
+    checkCustomTheme();
     if (!dontPushState)
         if (history.state?.back)
             history.replaceState({ page, title, theme, curSessionKey }, "");

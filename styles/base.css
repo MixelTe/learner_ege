@@ -1,3 +1,24 @@
+@property --c-back1 {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: white;
+}
+@property --c-back2 {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: white;
+}
+@property --c-text {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: black;
+}
+@property --c-title {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: brown;
+}
+
 :root {
 	--c-back1: white;
 	--c-back2: white;
@@ -19,10 +40,13 @@ body {
 	height: 100dvh;
 	min-width: 320px;
 	margin: 0;
-	background: linear-gradient(45deg, var(--c-back1), var(--c-back2));
+	background-image: linear-gradient(45deg, var(--c-back1), var(--c-back2));
 	color: var(--c-text);
 	display: grid;
 	grid-template-rows: 2.5rem 1fr auto;
+
+	transition-property: --c-back1, --c-back2, --c-text, --c-title, color;
+	transition-duration: 250ms;
 }
 
 h1,
@@ -35,6 +59,7 @@ h5 {
 	font-family: "Comfortaa", "PT Sans", Arial, Helvetica, sans-serif;
 }
 
+[disableanim="1"],
 [disableanim="1"] *::before,
 [disableanim="1"] *::after,
 [disableanim="1"] * {

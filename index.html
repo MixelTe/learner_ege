@@ -127,7 +127,7 @@
 				</template>
 			</div>
 		</div>
-		<div class="version">v1.1.0</div>
+		<div class="version">v1.2.0</div>
 	</div>
 	<div class="page" id="p-tester">
 		<div class="tester">
@@ -286,6 +286,11 @@
 			<span class="checkbox-mark"></span>
 			<span>Анимации</span>
 		</label>
+		<label class="checkbox">
+			<input type="checkbox" id="settings-adv">
+			<span class="checkbox-mark"></span>
+			<span>Меньше рекламы</span>
+		</label>
 		<div class="settings-customTheme">
 			<label class="checkbox">
 				<input type="checkbox" id="settings-customTheme">
@@ -294,14 +299,20 @@
 			</label>
 			<div class="settings-customTheme-inputs" id="settings-customTheme-inputs">
 				<div>
-					<span>Фон 1</span>
-					<input type="color" id="settings-color-back1">
-					<span>Фон 2</span>
-					<input type="color" id="settings-color-back2">
-					<span>Текст 1</span>
-					<input type="color" id="settings-color-text">
-					<span>Текст 2</span>
-					<input type="color" id="settings-color-title">
+					<div>
+
+						<span>Фон 1</span>
+						<input type="color" id="settings-color-back1">
+						<span>Фон 2</span>
+						<input type="color" id="settings-color-back2">
+						<span>Текст 1</span>
+						<input type="color" id="settings-color-text">
+						<span>Текст 2</span>
+						<input type="color" id="settings-color-title">
+					</div>
+					<button id="settings-customTheme-set">
+						Установить за рекламу
+					</button>
 				</div>
 			</div>
 		</div>
@@ -326,19 +337,19 @@
 			</div>
 		</div>
 	</div>
-	<footer style="max-height: 100px; z-index: 2;">
+	<footer style="max-height: 100px;" id="footer">
 		<!-- Yandex.RTB R-A-5910277-1 -->
 		<div id="yandex_rtb_R-A-5910277-1"></div>
 	</footer>
 	<!-- Yandex.Metrika counter -->
 	<script type="text/javascript">
-			(function (m, e, t, r, i, k, a)
-			{
-				m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
-				m[i].l = 1 * new Date();
-				for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
-				k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
-			})
+		(function (m, e, t, r, i, k, a)
+		{
+			m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+			m[i].l = 1 * new Date();
+			for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
+			k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+		})
 			(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
 		ym(96354999, "init", {

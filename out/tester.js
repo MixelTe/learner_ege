@@ -79,7 +79,7 @@ function runAfterAdv(f) {
         if (isNaN(completeCount))
             completeCount = 0;
         const lessAdv = localStorage.getItem(Keys.lessAdv) == "1";
-        const reqCount = lessAdv ? 5 : 3;
+        const reqCount = lessAdv ? 3 : 1;
         completeCount++;
         let show = false;
         if (completeCount >= reqCount) {

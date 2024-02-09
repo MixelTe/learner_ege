@@ -11,6 +11,7 @@ const keys = [
     "customColors",
     "completeCount",
     "lessAdv",
+    "lastAwr",
 ];
 export const Keys = {};
 for (const key of keys)
