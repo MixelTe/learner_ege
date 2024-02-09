@@ -91,9 +91,8 @@ function runAfterAdv(f) {
         }
         localStorage.setItem(Keys.completeCount, `${completeCount}`);
         if (show)
-            showAdvFullscreen(f);
-        else
-            f();
+            showAdvFullscreen();
+        f();
     };
 }
 export class TestItem {
