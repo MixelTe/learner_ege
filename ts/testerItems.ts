@@ -508,8 +508,10 @@ export class TestItemMultipleWordChoice extends TestItem
 		return this.parts.map(v => v.s).join("");
 	}
 
-	public getAnswer(): string | Node
+	public getAnswer(onlyAnswer = false): string | Node
 	{
+		if (onlyAnswer)
+			return this.parts.filter(v => v.r).map(v => v.s).join("");
 		return this.parts.map(v => v.a).join("");
 	}
 
@@ -528,7 +530,7 @@ export class TestItemMultipleWordChoice extends TestItem
 				Lib.SetContent(selectedEl, this.parts.filter(v => v.selected).map(v => Lib.Span([], v.s)))
 			}));
 
-		const answ = Lib.Div(["tester-collapsible", "tester-collapsible_noMargin", "tester-collapsible_collapsed"], Lib.Span([], "Ответ: " + this.getAnswer()));
+		const answ = Lib.Div(["tester-collapsible", "tester-collapsible_noMargin", "tester-collapsible_collapsed"], Lib.Span([], "Ответ: " + this.getAnswer(true)));
 
 		const task = Lib.Div("tester-multipleWordChoice", els);
 		const selectedEl = Lib.Span("tester-multipleWordChoice-selected");

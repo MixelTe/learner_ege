@@ -398,6 +398,7 @@ screen and (max-height: 550px) {
 
 .tester-multipleWordChoice {
 	margin-block: 0.5rem;
+	white-space: break-spaces;
 }
 .tester-multipleWordChoice button {
 	position: relative;
