@@ -15,6 +15,7 @@ declare global
 		defaultTheme: boolean,
 		customTheme: boolean,
 		disableAnim: boolean,
+		lessAdv: boolean,
 		longestDays: number,
 	}): void
 	var Ya:
@@ -24,9 +25,14 @@ declare global
 				AdvManager: {
 					render: (v: {
 						blockId: string,
-						renderTo: string,
+						renderTo?: string,
+						type?: string,
+						platform?: string,
+						onClose?: () => void,
+						onRewarded?: (isRewarded: boolean) => void,
 						darkTheme: boolean,
-					}) => void
+					}) => void,
+					getPlatform: () => string,
 				}
 			}
 		}
@@ -66,6 +72,7 @@ export function metrika_setParams()
 			defaultTheme: theme == "auto",
 			customTheme: localStorage.getItem(Keys.customTheme) == "1",
 			disableAnim: localStorage.getItem(Keys.animDisable) == "1",
+			lessAdv: localStorage.getItem(Keys.lessAdv) == "1",
 			longestDays: DayStatistics.getLongest(),
 		})
 	);
@@ -87,12 +94,56 @@ export function enableBottomAdv()
 {
 	if (bottomAdvEnabled) return;
 	bottomAdvEnabled = true;
-	
-	const theme = localStorage.getItem(Keys.theme) || "auto";
-	const dark = theme != "auto" ? theme == "dark" : window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+
 	Ya.Context.AdvManager.render({
 		"blockId": "R-A-5910277-1",
 		"renderTo": "yandex_rtb_R-A-5910277-1",
-		darkTheme: dark,
+		darkTheme: isDarkTheme(),
 	})
+}
+
+export function showAdvFullscreen(onClose?: () => void)
+{
+	if (Ya.Context.AdvManager.getPlatform() === "desktop")
+		Ya.Context.AdvManager.render({
+			"blockId": "R-A-5910277-2",
+			"type": "fullscreen",
+			"platform": "desktop",
+			darkTheme: isDarkTheme(),
+			onClose,
+		});
+	else
+		Ya.Context.AdvManager.render({
+			"blockId": "R-A-5910277-4",
+			"type": "fullscreen",
+			"platform": "touch",
+			darkTheme: isDarkTheme(),
+			onClose,
+		});
+}
+
+export function showAdvRewarded(onRewarded?: (isRewarded: boolean) => void)
+{
+	if (Ya.Context.AdvManager.getPlatform() === "desktop")
+		Ya.Context.AdvManager.render({
+			"blockId": "R-A-5910277-3",
+			"type": "rewarded",
+			"platform": "desktop",
+			darkTheme: isDarkTheme(),
+			onRewarded,
+		});
+	else
+		Ya.Context.AdvManager.render({
+			"blockId": "R-A-5910277-5",
+			"type": "rewarded",
+			"platform": "touch",
+			darkTheme: isDarkTheme(),
+			onRewarded,
+		});
+}
+
+function isDarkTheme()
+{
+	const theme = localStorage.getItem(Keys.theme) || "auto";
+	return theme != "auto" ? theme == "dark" : window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
 }
