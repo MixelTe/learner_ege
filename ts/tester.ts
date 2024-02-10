@@ -76,7 +76,7 @@ export class Tester
 					await Lib.wait(200);
 				runAfterAdv(
 					() => new Tester(this.theme).start()
-				)();
+				);
 			}),
 		]));
 		if (this.cor == this.items.length)
@@ -98,25 +98,22 @@ export class Tester
 
 function runAfterAdv(f: () => void)
 {
-	return () =>
+	let completeCount = parseInt(localStorage.getItem(Keys.completeCount) || "0", 10);
+	if (isNaN(completeCount)) completeCount = 0;
+	const lessAdv = localStorage.getItem(Keys.lessAdv) == "1";
+	const reqCount = lessAdv ? 4 : 2;
+
+	completeCount++;
+	let show = false;
+	if (completeCount >= reqCount)
 	{
-		let completeCount = parseInt(localStorage.getItem(Keys.completeCount) || "0", 10);
-		if (isNaN(completeCount)) completeCount = 0;
-		const lessAdv = localStorage.getItem(Keys.lessAdv) == "1";
-		const reqCount = lessAdv ? 4 : 2;
+		completeCount = 0;
+		show = true;
+	}
+	localStorage.setItem(Keys.completeCount, `${completeCount}`);
 
-		completeCount++;
-		let show = false;
-		if (completeCount >= reqCount)
-		{
-			completeCount = 0;
-			show = true;
-		}
-		localStorage.setItem(Keys.completeCount, `${completeCount}`);
-
-		if (show) showAdvFullscreen();
-		f();
-	};
+	if (show) showAdvFullscreen();
+	f();
 }
 
 export abstract class TestItem
