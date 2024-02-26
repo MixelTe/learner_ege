@@ -12,7 +12,7 @@ export const Sections: Section[] = [
 			{ id: "ru_7", count: 395, name: "№7 Формы слова", color: themes.blue, items: getItemLoader("ru_7"), onlyAnswerInQList: true },
 			{ id: "ru_8", count: 10, name: "№8 Грамматические нормы", color: themes.blue, items: getItemLoader("ru_8") },
 			{ id: "ru_9_1", count: 21, name: "№9 Чередующиеся корни", color: themes.blue, items: getItemLoader("ru_9_1") },
-			{ id: "ru_9_2", count: 620, name: "№9 Словарные слова", color: themes.blue, items: getItemLoader("ru_9_2"), onlyAnswerInQList: true },
+			{ id: "ru_9_2", count: 625, name: "№9 Словарные слова", color: themes.blue, items: getItemLoader("ru_9_2"), onlyAnswerInQList: true },
 			{ id: "ru_10", count: 16, name: "№10 Правописание приставок", color: themes.blue, items: getItemLoader("ru_10") },
 			{ id: "ru_10p", count: 1006, name: "№10 Практика", color: themes.blue, items: getItemLoader("ru_10p"), onlyAnswerInQList: true },
 			{ id: "ru_11", count: 19, name: "№11 Правописание суффиксов", color: themes.blue, items: getItemLoader("ru_11") },
