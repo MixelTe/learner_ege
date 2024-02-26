@@ -620,4 +620,9 @@ export const data = [
     new TestItemWordChoice(617, "Энцеф[+а|о]лит"),
     new TestItemWordChoice(618, "Эск[+а|о]лация"),
     new TestItemWordChoice(619, "Эсп[+е|и]ранто"),
+    new TestItemWordChoice(620, "И[+с|сс]кусство"),
+    new TestItemWordChoice(621, "Иску[+сс|с]тво"),
+    new TestItemWordChoice(622, "П[+е|и]риферия"),
+    new TestItemWordChoice(623, "Пер[+и|е]ферия"),
+    new TestItemWordChoice(624, "Периф[+е|и]рия"),
 ];
