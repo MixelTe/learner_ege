@@ -59,6 +59,7 @@ export class Tester
 
 	private async showEnd()
 	{
+		runAdv(this.cor == this.items.length);
 		pageEl.innerText = "";
 		idEl.innerText = "";
 		const text = `Результат: ${this.cor}/${this.items.length} (${Math.floor(this.cor / this.items.length * 100)}%)`;
@@ -67,16 +68,14 @@ export class Tester
 			Lib.Button([], "Вернуться", btn =>
 			{
 				btn.classList.add("active");
-				runAfterAdv(() => switchPage("main"));
+				switchPage("main");
 			}),
 			Lib.Button([], "Ещё раз", async btn =>
 			{
 				btn.classList.add("active");
 				if (!isAnimDisabled())
 					await Lib.wait(200);
-				runAfterAdv(
-					() => new Tester(this.theme).start()
-				);
+				new Tester(this.theme).start()
 			}),
 		]));
 		if (this.cor == this.items.length)
@@ -96,7 +95,7 @@ export class Tester
 	}
 }
 
-function runAfterAdv(f: () => void)
+function runAdv(long: boolean)
 {
 	let completeCount = parseInt(localStorage.getItem(Keys.completeCount) || "0", 10);
 	if (isNaN(completeCount)) completeCount = 0;
@@ -112,8 +111,7 @@ function runAfterAdv(f: () => void)
 	}
 	localStorage.setItem(Keys.completeCount, `${completeCount}`);
 
-	if (show) showAdvFullscreen();
-	f();
+	if (show) setTimeout(showAdvFullscreen, long ? 1250 : 750);
 }
 
 export abstract class TestItem
