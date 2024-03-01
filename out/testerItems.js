@@ -227,7 +227,6 @@ export class TestItemWordChoice extends TestItem {
     beforeTask = "";
     afterTask = "";
     choices = [];
-    rightChoiceI = -1;
     /**
      * @param task "Sky are [red|+blue|green], roses are red."
      *
@@ -243,32 +242,35 @@ export class TestItemWordChoice extends TestItem {
             return;
         }
         this.beforeTask = task.slice(0, start);
-        this.choices = task.slice(start + 1, end).split("|");
-        Lib.random.shuffle(this.choices);
         this.afterTask = task.slice(end + 1);
-        for (let i = 0; i < this.choices.length; i++) {
-            const choice0 = this.choices[i][0];
-            if (choice0 == "+") {
-                this.rightChoiceI = i;
-                this.choices[i] = this.choices[i].slice(1);
+        this.choices = [];
+        let rightExist = false;
+        for (let choice of task.slice(start + 1, end).split("|")) {
+            let r = false;
+            if (choice[0] == "+") {
+                r = true;
+                rightExist = true;
+                choice = choice.slice(1);
             }
-            this.choices[i] = this.choices[i].trim();
+            choice = choice.trim();
+            this.choices.push({ s: choice, r });
         }
-        if (this.rightChoiceI < 0)
+        if (!rightExist)
             console.error(`TestItemWordChoice[${id}] task dont have right choice: ${task}`);
     }
     getQuestion() {
-        return this.beforeTask + "[" + this.choices.join(" | ") + "]" + this.afterTask;
+        return this.beforeTask + "[" + this.choices.map(v => v.s).join(" | ") + "]" + this.afterTask;
     }
     getAnswer() {
-        return this.beforeTask + this.choices[this.rightChoiceI] + this.afterTask;
+        return this.beforeTask + this.choices.find(v => v.r)?.s + this.afterTask;
     }
     async show(taskEl, inputEl, onAnswer) {
+        Lib.random.shuffle(this.choices);
         const inputBtn = Lib.Button([], "Далее");
         inputBtn.disabled = true;
         const inputDiv = Lib.Div(["tester-input-one", "tester-input-one_hidden"], [inputBtn]);
         Lib.SetContent(inputEl, inputDiv);
-        const btns = this.choices.map((v, i) => Lib.Button([], v, () => showAns(i)));
+        const btns = this.choices.map((v, i) => Lib.Button([], v.s, () => showAns(i)));
         const choicesEl = Lib.Div("tester-wordChoice-choices", btns);
         const el = Lib.Div("tester-wordChoice", [
             Lib.Div("tester-wordChoice-text", this.beforeTask),
@@ -277,14 +279,15 @@ export class TestItemWordChoice extends TestItem {
         ]);
         Lib.SetContent(taskEl, el);
         const showAns = (I) => {
-            if (I < this.rightChoiceI)
+            const rightChoiceI = this.choices.findIndex(v => v.r);
+            if (I < rightChoiceI)
                 el.classList.add("tester-wordChoice-bottom");
-            if (I > this.rightChoiceI)
+            if (I > rightChoiceI)
                 el.classList.add("tester-wordChoice-top");
             for (let i = 0; i < btns.length; i++) {
                 const btn = btns[i];
                 btn.disabled = true;
-                if (i == this.rightChoiceI) {
+                if (i == rightChoiceI) {
                     btn.classList.add("tester-wordChoice-correct");
                     if (btn.innerText == "")
                         btn.classList.add("tester-wordChoice-correct_empty");
@@ -301,7 +304,7 @@ export class TestItemWordChoice extends TestItem {
             inputBtn.disabled = false;
             inputBtn.addEventListener("click", async () => {
                 inputBtn.classList.add("active");
-                onAnswer(I == this.rightChoiceI);
+                onAnswer(I == rightChoiceI);
             });
         };
     }
