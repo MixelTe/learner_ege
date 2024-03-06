@@ -32,6 +32,7 @@ export const data: TestItem[] = [
 	new TestItemSelfCheck(4, DBc("Теорема Пифагора"), createFormulas("c^2 = a^2 + b^2")),
 	new TestItemSelfCheck(36, DBc("Теорема синусов"), DBc().svg("math_1-36.svg").formula(createFormulas("{a}/{@{sin}'<A} = {b}/{@{sin}'<B} = {c}/{@{sin}'<C} = 2R", "R - радиус описанной окружности"))),
 	new TestItemSelfCheck(39, DBc("Теорема косинусов"), DBc().svg("math_1-39.svg").formula(createFormulas("c^2 = a^2 + b^2 - 2ab*@{cos}'<C"))),
+	new TestItemSelfCheck(40, DBc("Теорема о пропорциональных отрезках"), DBc().svg("math_1-40.svg").formula(createFormulas("{OA}/{OB} = {OC}/{OD}")).text("", "Параллельные прямые, пересекающие стороны угла, отсекают от его сторон пропорциональные отрезки")),
 	new TestItemSelfCheck(5, DBc("Свойства прямоугольного параллелепипеда"), DBc().svg("math_1-5.svg").ul("Все грани - прямоугольники", "Противоположные грани равны и параллельны", "Все двугранные углы – прямые", "Диагонали равны", "Диагонали пересекаются в одной точке и делятся в ней пополам")),
 	new TestItemSelfCheck(24, DBc("Сумма углов выпуклого четырехугольника"), createFormulas("360'0")),
 	new TestItemSelfCheck(25, DBc("Середины сторон выпуклого четырехугольника"), DBc().svg("math_1-25.svg").text("Середины сторон выпуклого четырехугольника являются вершинами параллелограмма")),

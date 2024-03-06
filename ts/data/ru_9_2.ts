@@ -627,4 +627,11 @@ export const data: TestItem[] = [
 	new TestItemWordChoice(622, "П[+е|и]риферия"),
 	new TestItemWordChoice(623, "Пер[+и|е]ферия"),
 	new TestItemWordChoice(624, "Периф[+е|и]рия"),
+	new TestItemWordChoice(625, "Га[+л|лл]ерея"),
+	new TestItemWordChoice(626, "Г[+а|о]лерея"),
+	new TestItemWordChoice(627, "Гал[+е|и]рея"),
+	new TestItemWordChoice(628, "На[+с|дс|тс]мехаться"),
+	new TestItemWordChoice(629, "[+Вследствие|В следствие] дождя"),
+	new TestItemWordChoice(630, "Вследстви[+е|и]"),
+	new TestItemWordChoice(631, "Впоследстви[+и|е]"),
 ];
