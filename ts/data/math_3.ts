@@ -47,7 +47,7 @@ export const data: TestItem[] = [
 	new TestItemSelfCheck(22, DBc("Арифметическая прогрессия"), DBc().formula(createFormulas("a_n = a_1 + (n - 1)d", "S_n = {a_1 + a_n}/{2} * n", "a_n = {a_{n-1} + a_{n+1}}/{2}"))),
 	new TestItemSelfCheck(23, DBc("Геометрическая прогрессия"), DBc().formula(createFormulas("b_n = b_1q^{n-1}", "S_n = b_1{q^n - 1}/{q - 1}", "b_n^2 = b_{n-1}*b_{n+1}"))),
 	new TestItemSelfCheck(24, DBc("Правила действий со степенями"), createFormulas("a^m*a^n = a^{m+n}", "{a^m}/{a^n} = a^{m-n}", "(a^m)^n = (a^n)^m = a^{mn}", "a^nb^n = (ab)^n", "{a^n}/{b^n} = ({a}/{b})^n")),
-	new TestItemSelfCheck(25, DBc("Основное логарифмическое тождество"), createFormulas("|a^{@{@log}_ab} = b", "", "b > 0, a > 0, a '= 1", "@{@log}_ab = c 'ab a^c = b")),
+	new TestItemSelfCheck(25, DBc("Основное логарифмическое тождество"), createFormulas("|a^{@{@log}_ab} = b", "", "b > 0, a > 0, a '= 1", "@{@log}_ab = c 'ab a^c = b", "", "Свойство:", "|a^{@{@log}_bc} = c^{@{@log}_ba}")),
 	new TestItemSelfCheck(26,
 		DBc()
 			.text("Основные формулы для логарифмов", "")
