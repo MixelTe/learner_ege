@@ -190,6 +190,8 @@ screen and (max-height: 550px) {
 .tester-wordChoice {
 	display: flex;
 	align-items: center;
+	flex-wrap: wrap;
+	justify-content: center;
 }
 
 .tester-wordChoice-text {
@@ -217,6 +219,7 @@ screen and (max-height: 550px) {
 	height: 1.4em;
 	max-height: 2em;
 	max-width: 20em;
+	text-wrap: nowrap;
 	cursor: pointer;
 	transition-property: padding, margin, border, max-height, max-width;
 	transition-duration: 150ms;

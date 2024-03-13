@@ -126,5 +126,12 @@ export const data = [
     new TestItemSelfCheck(120, DBc("Ход луча, прошедшего рассеивающую линзу"), DBc().svg("phy_0-120.svg")),
     new TestItemSelfCheck(121, DBc("Максимумы и минимумы в интерференционной картине"), createFormulas("'dd_{max} = k'l", "'dd_{min} = (2k' + 1){'l}/{2}", "k 'in 'Z")),
     new TestItemSelfCheck(122, DBc("Условие максимума для дифракционной решётки"), createFormulas("d*@{sin}'f = k'l", "k 'in 'Z")),
+    new TestItemSelfCheck(123, DBc("Формула Планка (Энергия фотона)"), createFormulas("|E = h'n", "'n - частота света", "h - постоянная Планка", "h = 6.63 * 10^{-34} Дж*с")),
+    new TestItemSelfCheck(124, DBc("Импульс фотона"), createFormulas("|p = {E}/{c}", "E - энергия фотона", "c - скорость света")),
+    new TestItemSelfCheck(125, DBc("Уравнение Эйнштейна для фотоэффекта"), createFormulas("E_{фотона} = A_{выхода} + E_{кин max электрона}", "", "E_{фотона} = h'n", "E_{кин max электрона} = {m'v^{ 2}}/{2}")),
+    new TestItemSelfCheck(126, DBc("Запирающее напряжение при фотоэффекте"), createFormulas("|eU_{зап} = {m'v^{ 2}}/{2}", "e - заряд электрона", "m - масса электрона", "'v - max скорость электронов")),
+    new TestItemSelfCheck(127, DBc("Излучение и поглощение фотонов при переходе атома с одного уровня энергии на другой"), createFormulas("h'n_{mn} = @|E_n - E_m@| = 'dE")),
+    new TestItemSelfCheck(128, DBc("Энергия уровней атома водорода"), createFormulas("E_n = {-13.6 эВ}/{n^2}", "n = 1, 2, 3, ...")),
+    new TestItemSelfCheck(129, DBc("Составляющие атома"), createFormulas("|>{^{атомная масса}_{порядковый номер}}X", "e = [порядковый номер]", "p = [порядковый номер]", "n = [масса] - [порядковый номер]")),
     // new TestItemSelfCheck(1, DBc(""), createFormulas("")),
 ];

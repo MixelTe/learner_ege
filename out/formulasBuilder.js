@@ -139,6 +139,13 @@ export class FormulaBuilder {
         this.text += fb.text;
         return this;
     }
+    alignRight(fb) {
+        fb.body.classList.add("formula-alignRight");
+        this.prevEl = fb.body;
+        this.body.appendChild(this.prevEl);
+        this.text += fb.text;
+        return this;
+    }
     arc(fb) {
         this.prevEl = Span("formula-arc", [fb.body]);
         this.body.appendChild(this.prevEl);
@@ -217,6 +224,7 @@ export function FB(text) {
  * \#    | overline
  * \\    | square root
  * \@    | no italic
+ * >     | align right
  * '     | control next
  * u{}   | arc
  *
@@ -299,6 +307,7 @@ const replaceLetters = {
  * \#    | overline
  * \\    | square root
  * \@    | no italic
+ * >     | align right
  * '     | control next
  * u{}   | arc
  *
@@ -365,6 +374,8 @@ export function createFormula(formula, italic = false) {
                             fb.noItalic(createFormula(inBrackets));
                         else if (formula[bracketsStart - 1] == "u")
                             fb.arc(createFormula(inBrackets));
+                        else if (formula[bracketsStart - 1] == ">")
+                            fb.alignRight(createFormula(inBrackets));
                         else
                             fb.a(createFormula(inBrackets));
                     }
@@ -400,6 +411,9 @@ export function createFormula(formula, italic = false) {
         }
         else if (ch == "u" && formula[i + 1] == "{") {
             // use u as marker
+        }
+        else if (ch == ">" && formula[i + 1] == "{") {
+            // use > as marker
         }
         else if (ch == "'") {
             const next2 = formula[i + 1] + formula[i + 2];
