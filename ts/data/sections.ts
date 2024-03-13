@@ -5,6 +5,7 @@ export const Sections: Section[] = [
 	{
 		name: "Русский",
 		themes: [
+			{ id: "ru_1", count: 41, name: "№1 Средства связи", color: themes.blue, items: getItemLoader("ru_1") },
 			{ id: "ru_3", count: 42, name: "№3 Стили речи", color: themes.blue, items: getItemLoader("ru_3") },
 			{ id: "ru_4", count: 265, name: "№4 Ударения", color: themes.blue, items: getItemLoader("ru_4"), onlyAnswerInQList: true },
 			{ id: "ru_5", count: 144, name: "№5 Паронимы", color: themes.blue, items: getItemLoader("ru_5"), onlyAnswerInQList: true },
