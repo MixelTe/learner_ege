@@ -55,8 +55,8 @@ export function enableBottomAdv() {
         return;
     bottomAdvEnabled = true;
     tryCall(() => Ya.Context.AdvManager.render({
-        "blockId": "R-A-5910277-1",
-        "renderTo": "yandex_rtb_R-A-5910277-1",
+        "blockId": "R-A-6760567-1",
+        "renderTo": "yandex_rtb_R-A-6760567-1",
         darkTheme: isDarkTheme(),
         onError: data => {
             bottomAdvEnabled = false;
@@ -68,7 +68,7 @@ export function showAdvFullscreen(onClose) {
     tryCall(() => {
         if (Ya.Context.AdvManager.getPlatform() === "desktop")
             Ya.Context.AdvManager.render({
-                "blockId": "R-A-5910277-2",
+                "blockId": "R-A-6760567-2",
                 "type": "fullscreen",
                 "platform": "desktop",
                 darkTheme: isDarkTheme(),
@@ -80,7 +80,7 @@ export function showAdvFullscreen(onClose) {
             });
         else
             Ya.Context.AdvManager.render({
-                "blockId": "R-A-5910277-4",
+                "blockId": "R-A-6760567-3",
                 "type": "fullscreen",
                 "platform": "touch",
                 darkTheme: isDarkTheme(),
@@ -96,7 +96,7 @@ export function showAdvRewarded(onRewarded) {
     tryCall(() => {
         if (Ya.Context.AdvManager.getPlatform() === "desktop")
             Ya.Context.AdvManager.render({
-                "blockId": "R-A-5910277-3",
+                "blockId": "R-A-6760567-4",
                 "type": "rewarded",
                 "platform": "desktop",
                 darkTheme: isDarkTheme(),
@@ -108,7 +108,7 @@ export function showAdvRewarded(onRewarded) {
             });
         else
             Ya.Context.AdvManager.render({
-                "blockId": "R-A-5910277-5",
+                "blockId": "R-A-6760567-5",
                 "type": "rewarded",
                 "platform": "touch",
                 darkTheme: isDarkTheme(),
