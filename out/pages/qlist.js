@@ -38,7 +38,7 @@ export function showQlist(onSwitch = () => { }) {
     }
 }
 export async function showItemQs(sectionName, theme) {
-    switchPage("qlist", theme.name, theme.color, () => qlistPage.scroll(0, 0), sectionName);
+    switchPage({ page: "qlist", title: "qlist/" + sectionName }, theme.name, theme.color, () => qlistPage.scroll(0, 0), sectionName);
     Lib.SetContent(qlistEl, Lib.Div("loading", "Загрузка заданий"));
     qlistEl.classList.toggle("qlist_single", !!theme.onlyAnswerInQList);
     const stats = Trainer.getStatistics().themes.find(v => v.id == theme.id);
