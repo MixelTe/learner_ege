@@ -8,6 +8,7 @@ import { Tester } from "./tester.js";
 import { initThemes, themes } from "./themes.js";
 import { showAbout } from "./pages/about.js";
 import { isAnimDisabled, showSettings } from "./pages/settings.js";
+import { Trainer } from "./trainer.js";
 
 initThemes();
 
@@ -52,7 +53,7 @@ function closeMenu(instant = true)
 	menu.classList.remove("open");
 }
 Lib.addButtonListener("btn-index", () => switchPage("main", "", themes.common, closeMenu));
-Lib.addButtonListener("btn-stats", () => showStats(closeMenu));
+// Lib.addButtonListener("btn-stats", () => showStats(closeMenu));
 Lib.addButtonListener("btn-qlist", () => showQlist(closeMenu));
 Lib.addButtonListener("btn-dayStats", () => showDayStats(closeMenu));
 Lib.addButtonListener("btn-about", () => showAbout(closeMenu));
@@ -74,6 +75,7 @@ async function initMainPage()
 
 	const sections = Lib.get.div("sections");
 	const sectionTemplate = Lib.getEl("template-section", HTMLTemplateElement);
+	const allStats = Trainer.getStatistics();
 	for (let i = 0; i < Sections.length; i++)
 	{
 		const s = Sections[i];
@@ -86,7 +88,12 @@ async function initMainPage()
 		const themes = section.querySelector(".sectionSelection-list")!;
 		for (const theme of s.themes)
 		{
-			themes.appendChild(Lib.Button([], theme.name, () =>
+			const stats = allStats.themes.find(v => v.id == theme.id);
+			const itemScore = stats ? Trainer.calcScore(stats, theme.count) : 0;
+			themes.appendChild(Lib.Button([], [
+				theme.name,
+				createMarker(itemScore),
+			], () =>
 			{
 				sections.querySelectorAll("input").forEach(inp => inp.checked = false);
 				new Tester(theme).start();
@@ -111,4 +118,22 @@ async function initMainPage()
 			await Lib.wait(500);
 		document.body.removeChild(beforeload);
 	}
+}
+
+function createMarker(value: number)
+{
+	const marker = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+	marker.setAttribute("viewbox", "0 0 20 20")
+	const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+	marker.appendChild(circle);
+	circle.setAttribute("stroke", "var(--c-title)")
+	circle.setAttribute("cx", "10")
+	circle.setAttribute("cy", "10")
+	circle.setAttribute("r", "9")
+	circle.setAttribute("stroke-width", "1.5")
+	circle.setAttribute("fill", "transparent")
+	circle.setAttribute("transform", "rotate(-90 10 10)")
+	const maxV = 54;
+	circle.setAttribute("stroke-dasharray", `${value * maxV} ${maxV * 2}`);
+	return marker;
 }
