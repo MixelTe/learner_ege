@@ -26,13 +26,12 @@ export class Trainer {
             this.turn = 0;
         }
         this.turn += 1;
-        if (this.turn > 2) {
+        if (this.turn > 2)
             this.turn = 0;
-            this.seed = Lib.random.int(100000);
-        }
         const stats = this.getStatistics();
         const statsItems = stats.themes.find(v => v.id == theme.id)?.items || [];
-        if (this.turn == 0) {
+        if (this.turn == 0 || theme.disableRepeat) {
+            this.seed = Lib.random.int(100000);
             statsItems.forEach(v => v.hist_old = v.hist);
             this.setStatistics(stats);
         }
