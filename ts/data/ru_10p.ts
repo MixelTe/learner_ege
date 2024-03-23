@@ -347,7 +347,6 @@ export const data: TestItem[] = [
 	new TestItemWordChoice(342, "не[+с|з]гибаемый (характер)"),
 	new TestItemWordChoice(343, "не[+с|з]гибаемый"),
 	new TestItemWordChoice(344, "не[+о|а]глядный (простор)"),
-	new TestItemWordChoice(345, "не[+о|а]глядный"),
 	new TestItemWordChoice(346, "не[+с|з]говорчивый"),
 	new TestItemWordChoice(347, "не[+с|з]гораемый"),
 	new TestItemWordChoice(348, "не[+с|з]горевший"),
