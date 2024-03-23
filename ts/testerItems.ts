@@ -533,7 +533,8 @@ export class TestItemMultipleWordChoice extends TestItem
 				Lib.SetContent(selectedEl, this.parts.filter(v => v.selected).map(v => Lib.Span([], v.s)))
 			}));
 
-		const answ = Lib.Div(["tester-collapsible", "tester-collapsible_noMargin", "tester-collapsible_collapsed"], Lib.Span([], "Ответ: " + this.getAnswer(true)));
+		const answEl = Lib.Span("tester-multipleWordChoice-answer", "Ответ: " + this.getAnswer(true));
+		const answ = Lib.Div(["tester-collapsible", "tester-collapsible_noMargin", "tester-collapsible_collapsed"], answEl);
 
 		const task = Lib.Div("tester-multipleWordChoice", els);
 		const selectedEl = Lib.Span("tester-multipleWordChoice-selected");
@@ -550,6 +551,12 @@ export class TestItemMultipleWordChoice extends TestItem
 		Lib.SetContent(inputEl, Lib.Div("tester-input-one", Lib.Button([], "Ответить", btn =>
 		{
 			answ.classList.remove("tester-collapsible_collapsed");
+			Lib.SetContent(answEl, [
+				Lib.Span([], "Ответ: "),
+				...this.parts.filter(v => v.r).map(v =>
+					Lib.Span(v.selected ? [] : "tester-multipleWordChoice-notSelected", v.s)
+				),
+			])
 			this.parts.filter(v => v.selected).forEach((v, i) => selectedEl.children[i].classList.add("tester-multipleWordChoice-selected_" + (v.r ? "correct" : "wrong")));
 			done = true;
 			let correct = true;

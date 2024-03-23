@@ -24,12 +24,12 @@ export const Sections: Section[] = [
 			{ id: "ru_13p", count: 254, name: "№13 Практика", color: themes.blue, items: getItemLoader("ru_13p"), onlyAnswerInQList: true },
 			{ id: "ru_14", count: 86, name: "№14 Слитно, дефис или раздельно", color: themes.blue, items: getItemLoader("ru_14") },
 			{ id: "ru_15", count: 3, name: "№15 Н и НН в суффиксах", color: themes.blue, items: getItemLoader("ru_15") },
-			{ id: "ru_15p", count: 234, name: "№15 Практика", color: themes.blue, items: getItemLoader("ru_15p"), onlyAnswerInQList: true },
+			{ id: "ru_15p", count: 234, name: "№15 Практика", color: themes.blue, items: getItemLoader("ru_15p"), onlyAnswerInQList: true, disableRepeat: true },
 			{ id: "ru_16", count: 4, name: "№16-20 Пунктуация", color: themes.blue, items: getItemLoader("ru_16") },
-			{ id: "ru_17p", count: 235, name: "№17 Практика", color: themes.blue, items: getItemLoader("ru_17p"), onlyAnswerInQList: true },
-			{ id: "ru_18p", count: 272, name: "№18 Практика", color: themes.blue, items: getItemLoader("ru_18p"), onlyAnswerInQList: true },
-			{ id: "ru_19p", count: 289, name: "№19 Практика", color: themes.blue, items: getItemLoader("ru_19p"), onlyAnswerInQList: true },
-			{ id: "ru_20p", count: 230, name: "№20 Практика", color: themes.blue, items: getItemLoader("ru_20p"), onlyAnswerInQList: true },
+			{ id: "ru_17p", count: 235, name: "№17 Практика", color: themes.blue, items: getItemLoader("ru_17p"), onlyAnswerInQList: true, disableRepeat: true },
+			{ id: "ru_18p", count: 272, name: "№18 Практика", color: themes.blue, items: getItemLoader("ru_18p"), onlyAnswerInQList: true, disableRepeat: true },
+			{ id: "ru_19p", count: 289, name: "№19 Практика", color: themes.blue, items: getItemLoader("ru_19p"), onlyAnswerInQList: true, disableRepeat: true },
+			{ id: "ru_20p", count: 230, name: "№20 Практика", color: themes.blue, items: getItemLoader("ru_20p"), onlyAnswerInQList: true, disableRepeat: true },
 			{ id: "ru_26", count: 41, name: "№26 Cредства выразительности", color: themes.blue, items: getItemLoader("ru_26") },
 		],
 	},
@@ -69,6 +69,7 @@ export interface Theme
 	count: number,
 	items: () => Promise<TestItem[]>,
 	onlyAnswerInQList?: true,
+	disableRepeat?: true,
 }
 
 function getItemLoader(name: string)
