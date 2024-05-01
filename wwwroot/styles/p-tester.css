@@ -192,22 +192,27 @@ screen and (max-height: 550px) {
 	align-items: center;
 	flex-wrap: wrap;
 	justify-content: center;
+    padding-block: 0.5em;
 }
 
 .tester-wordChoice-text {
 	transition: transform 150ms;
+	white-space: break-spaces;
 }
 .tester-wordChoice-top > .tester-wordChoice-text {
-	transform: translateY(-0.7em);
+	transform: translateY(-0.75em);
 }
 .tester-wordChoice-bottom > .tester-wordChoice-text {
-	transform: translateY(0.7em);
+	transform: translateY(0.75em);
 }
 
 .tester-wordChoice-choices {
 	display: flex;
 	flex-direction: column;
-	margin-inline: 0.1em;
+}
+
+.tester-wordChoice-choices-correct {
+    margin-inline: -0.1em;
 }
 
 .tester-wordChoice-choices button {

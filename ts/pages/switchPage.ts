@@ -30,6 +30,12 @@ window.addEventListener("mousedown", e => mouse = { x: e.clientX, y: e.clientY }
 const instant = false;
 if (instant) console.warn("DEV: instant is enabled");
 
+let updateMainPage = () => { };
+export function setUpdateMainPage(f: () => void)
+{
+	updateMainPage = f;
+}
+
 export async function switchPage(page: Page | { page: Page, title: string }, title: string | { display: string, title: string } = "", theme: Themes = themes.common, onSwitch: () => void = () => { }, subtitle = "", dontPushState = false)
 {
 	const pageTitle = typeof page == "string" ? page : page.title;
@@ -41,6 +47,9 @@ export async function switchPage(page: Page | { page: Page, title: string }, tit
 
 	metrika_pageSwitch(prevPage, pageTitle, documentTitle)
 	prevPage = pageTitle;
+
+	if (page == "main")
+		updateMainPage();
 
 	if (instant || isAnimDisabled())
 	{

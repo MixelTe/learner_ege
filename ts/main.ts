@@ -3,7 +3,7 @@ import { showDayStats } from "./pages/dayStats.js";
 import * as Lib from "./littleLib.js";
 import { showItemQs, showQlist } from "./pages/qlist.js";
 import { showStats } from "./pages/stats.js";
-import { curSessionKey, switchPage } from "./pages/switchPage.js";
+import { curSessionKey, setUpdateMainPage, switchPage } from "./pages/switchPage.js";
 import { Tester } from "./tester.js";
 import { initThemes, themes } from "./themes.js";
 import { showAbout } from "./pages/about.js";
@@ -14,6 +14,7 @@ initThemes();
 
 const menu = Lib.get.div("menu");
 const btnAbout = Lib.get.button("btn-about");
+const statMarkers: SVGCircleElement[] = [];
 
 let menuOpen = false;
 Lib.addButtonListener("menuBtn", () =>
@@ -60,13 +61,14 @@ Lib.addButtonListener("btn-about", () => showAbout(closeMenu));
 Lib.addButtonListener("btn-settings", () => showSettings(closeMenu));
 
 initMainPage();
+setUpdateMainPage(updateMainPage);
 // showStats();
 // showQlist();
 // showItemQs("", Sections[0].themes[15]);
 // showDayStats();
 // showAbout();
 // showSettings();
-// new Tester(Sections[2].themes[0]).start();
+// new Tester(Sections[0].themes[16]).start();
 
 
 async function initMainPage()
@@ -120,6 +122,21 @@ async function initMainPage()
 	}
 }
 
+export function updateMainPage()
+{
+	const allStats = Trainer.getStatistics();
+	let i = 0;
+	for (const s of Sections)
+		for (const theme of s.themes)
+		{
+			const stats = allStats.themes.find(v => v.id == theme.id);
+			const itemScore = stats ? Trainer.calcScore(stats, theme.count) : 0;
+			const circle = statMarkers[i++];
+			const maxV = 54;
+			circle.setAttribute("stroke-dasharray", `${itemScore * maxV} ${maxV * 2}`);
+		}
+}
+
 function createMarker(value: number)
 {
 	const marker = document.createElementNS("http://www.w3.org/2000/svg", "svg");
@@ -135,5 +152,6 @@ function createMarker(value: number)
 	circle.setAttribute("transform", "rotate(-90 10 10)")
 	const maxV = 54;
 	circle.setAttribute("stroke-dasharray", `${value * maxV} ${maxV * 2}`);
+	statMarkers.push(circle)
 	return marker;
 }
