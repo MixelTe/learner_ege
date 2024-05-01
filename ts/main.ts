@@ -3,7 +3,7 @@ import { showDayStats } from "./pages/dayStats.js";
 import * as Lib from "./littleLib.js";
 import { showItemQs, showQlist } from "./pages/qlist.js";
 import { showStats } from "./pages/stats.js";
-import { curSessionKey, setUpdateMainPage, switchPage } from "./pages/switchPage.js";
+import { curSessionKey, regPage, setUpdateMainPage, switchPage } from "./pages/switchPage.js";
 import { Tester } from "./tester.js";
 import { initThemes, themes } from "./themes.js";
 import { showAbout } from "./pages/about.js";
@@ -116,11 +116,18 @@ async function initMainPage()
 	if (beforeload)
 	{
 		beforeload.style.opacity = "0";
-		if (!isAnimDisabled())
-			await Lib.wait(500);
+		await Lib.wait(500);
 		document.body.removeChild(beforeload);
 	}
 }
+
+regPage("tester", null, themeId =>
+{
+	for (const section of Sections)
+		for (const theme of section.themes)
+			if (theme.id == themeId)
+				new Tester(theme).start();
+});
 
 export function updateMainPage()
 {

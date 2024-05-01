@@ -3,7 +3,7 @@ import * as Lib from "../littleLib.js";
 import { metrika_event, metrika_setParams, showAdvRewarded } from "../metrika.js";
 import { Popup } from "../popup.js";
 import { setThemeScheme, themes } from "../themes.js";
-import { switchPage } from "./switchPage.js";
+import { regPage, switchPage } from "./switchPage.js";
 
 const theme_light = Lib.getInput("settings-theme-light");
 const theme_dark = Lib.getInput("settings-theme-dark");
@@ -278,6 +278,7 @@ export function isAnimDisabled()
 	return animDisabled;
 }
 
+regPage("settings", showSettings);
 export function showSettings(onSwitch: () => void = () => { })
 {
 	switchPage("settings", "Настройки", themes.common, onSwitch);

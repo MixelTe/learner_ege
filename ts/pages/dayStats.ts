@@ -1,7 +1,7 @@
 import { DayStatistics } from "../dayStatistics.js";
 import { getMonthEndDate } from "../functions.js";
 import * as Lib from "../littleLib.js";
-import { switchPage } from "./switchPage.js";
+import { regPage, switchPage } from "./switchPage.js";
 import { themes } from "../themes.js";
 
 const scale = Lib.get.el("dayStats-scale", HTMLSpanElement);
@@ -18,6 +18,7 @@ const size = 12;
 const tsize = 15;
 const r = 3;
 
+regPage("dayStats", showDayStats);
 export function showDayStats(onSwitch: () => void = () => { })
 {
 	switchPage("dayStats", "Статистика", themes.common, onSwitch);
