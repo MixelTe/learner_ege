@@ -9,7 +9,9 @@ if (devSelectId >= -2)
     console.warn("DEV: devSelectId is enabled");
 export class Trainer {
     static async selectTasks(theme) {
-        const items = await theme.items();
+        const { items, success } = await theme.items();
+        if (!success)
+            return null;
         if (devSelectId == -1) {
             const item = items.at(-1);
             return item ? [item] : [];

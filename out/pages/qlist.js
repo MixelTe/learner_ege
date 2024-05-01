@@ -49,7 +49,11 @@ export async function showItemQs(sectionName, theme) {
     Lib.SetContent(qlistEl, Lib.Div("loading", "Загрузка заданий"));
     qlistEl.classList.toggle("qlist_single", !!theme.onlyAnswerInQList);
     const stats = Trainer.getStatistics().themes.find(v => v.id == theme.id);
-    const items = await theme.items();
+    const { items, success } = await theme.items();
+    if (!success) {
+        Lib.SetContent(qlistEl, Lib.Div("loading-error", "Ошибка загрузки :("));
+        return;
+    }
     qlistEl.innerHTML = "";
     for (const item of items) {
         const stat = stats?.items?.find?.(v => v.id == item.id)?.hist || "";

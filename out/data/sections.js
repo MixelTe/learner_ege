@@ -52,12 +52,16 @@ export const Sections = [
     },
 ];
 function getItemLoader(name) {
-    let dataCache = [];
+    let dataCache = { items: [], success: false };
     return async function () {
-        if (dataCache.length > 0)
+        if (dataCache.success)
             return dataCache;
-        const { data } = await import("./" + name + ".js");
-        dataCache = data;
+        try {
+            const { data } = await import("./" + name + ".js");
+            dataCache.items = data;
+            dataCache.success = true;
+        }
+        catch { }
         return dataCache;
     };
 }
@@ -68,7 +72,7 @@ async function checkItems() {
         for (const theme of section.themes) {
             let r = true;
             let id = 0;
-            const items = await theme.items();
+            const { items } = await theme.items();
             for (const item of items) {
                 const c = items.filter(v => v.id == item.id).length == 1;
                 if (!c) {

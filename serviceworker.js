@@ -3,6 +3,10 @@ const host = location.host;
 
 const urlsToCache = [
     "./",
+    "./manifest.json",
+    "./favicon.ico",
+    "https://fonts.googleapis.com/css?family=PT+Sans|Comfortaa|Arimo",
+    "https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded",
     "./styles/base.css",
     "./styles/popup.css",
     "./styles/themes.css",
