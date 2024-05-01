@@ -272,10 +272,13 @@ export class TestItemWordChoice extends TestItem {
         Lib.SetContent(inputEl, inputDiv);
         const btns = this.choices.map((v, i) => Lib.Button([], v.s, () => showAns(i)));
         const choicesEl = Lib.Div("tester-wordChoice-choices", btns);
+        const beforeTask = this.beforeTask.split(" ");
         const el = Lib.Div("tester-wordChoice", [
-            Lib.Div("tester-wordChoice-text", this.beforeTask),
+            ...beforeTask.map((v, i) => Lib.Div("tester-wordChoice-text", v + (i < beforeTask.length - 1 ? " " : ""))),
+            // Lib.Div("tester-wordChoice-text", this.beforeTask),
             choicesEl,
-            Lib.Div("tester-wordChoice-text", this.afterTask),
+            ...this.afterTask.split(" ").map(v => Lib.Div("tester-wordChoice-text", v + " ")),
+            // Lib.Div("tester-wordChoice-text", this.afterTask),
         ]);
         Lib.SetContent(taskEl, el);
         const showAns = (I) => {
@@ -284,6 +287,8 @@ export class TestItemWordChoice extends TestItem {
                 el.classList.add("tester-wordChoice-bottom");
             if (I > rightChoiceI)
                 el.classList.add("tester-wordChoice-top");
+            if (I == rightChoiceI)
+                choicesEl.classList.add("tester-wordChoice-choices-correct");
             for (let i = 0; i < btns.length; i++) {
                 const btn = btns[i];
                 btn.disabled = true;

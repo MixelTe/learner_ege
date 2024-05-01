@@ -18,7 +18,7 @@ export class Tester {
         this.theme = theme;
     }
     async start() {
-        switchPage({ page: "tester", title: "tester/" + this.theme.id }, { display: this.theme.name, title: " |> " + this.theme.name }, this.theme.color);
+        switchPage({ page: "tester", subpath: this.theme.id }, { display: this.theme.name, title: " |> " + this.theme.name }, this.theme.color);
         this.loading();
         this.items = await Trainer.selectTasks(this.theme);
         this.next();

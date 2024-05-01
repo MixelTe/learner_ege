@@ -67,7 +67,7 @@ export class Trainer {
         let score = 0;
         for (const item of theme.items) {
             if (item.hist.length != 0)
-                score += sumStr(item.hist) / item.hist.length;
+                score += sumStr(item.hist) / Math.max(item.hist.length, 2);
         }
         return score / itemCount;
     }

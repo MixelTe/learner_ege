@@ -51,6 +51,7 @@ function tryCall(f, ef) {
 }
 let bottomAdvEnabled = false;
 export function enableBottomAdv() {
+    return;
     if (bottomAdvEnabled)
         return;
     bottomAdvEnabled = true;
@@ -65,6 +66,7 @@ export function enableBottomAdv() {
     }));
 }
 export function showAdvFullscreen(onClose) {
+    return;
     tryCall(() => {
         if (Ya.Context.AdvManager.getPlatform() === "desktop")
             Ya.Context.AdvManager.render({

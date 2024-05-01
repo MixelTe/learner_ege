@@ -1,9 +1,9 @@
 import { Keys } from "../keys.js";
 import * as Lib from "../littleLib.js";
-import { metrika_event, metrika_setParams, showAdvRewarded } from "../metrika.js";
+import { metrika_event, metrika_setParams } from "../metrika.js";
 import { Popup } from "../popup.js";
 import { setThemeScheme, themes } from "../themes.js";
-import { switchPage } from "./switchPage.js";
+import { regPage, switchPage } from "./switchPage.js";
 const theme_light = Lib.getInput("settings-theme-light");
 const theme_dark = Lib.getInput("settings-theme-dark");
 const theme_auto = Lib.getInput("settings-theme-auto");
@@ -15,8 +15,8 @@ const color_back1 = Lib.getInput("settings-color-back1");
 const color_back2 = Lib.getInput("settings-color-back2");
 const color_text = Lib.getInput("settings-color-text");
 const color_title = Lib.getInput("settings-color-title");
-const footer = Lib.getEl("footer", HTMLElement);
-const adv = Lib.getInput("settings-adv");
+// const footer = Lib.getEl("footer", HTMLElement);
+// const adv = Lib.getInput("settings-adv");
 const data_collapse = Lib.getInput("settings-data-collapse");
 theme_light.addEventListener("change", () => setThemeScheme("light"));
 theme_dark.addEventListener("change", () => setThemeScheme("dark"));
@@ -61,31 +61,34 @@ if (localStorage.getItem(Keys.customTheme) == "1") {
     customTheme_inputs.classList.add("settings-customTheme-inputs_open");
     updateThemeColors();
 }
-Lib.addButtonListener("settings-customTheme-set", () => {
-    const now = new Date();
-    now.setDate(now.getDate() - 4);
-    now.setMinutes(now.getMinutes() + 3);
-    localStorage.setItem(Keys.lastAwr, now.toISOString());
-    showAdvRewarded(rewarded => {
-        if (rewarded)
-            localStorage.setItem(Keys.lastAwr, new Date().toISOString());
-        const popup = new Popup();
-        popup.cancelBtn = false;
-        popup.okBtn = false;
-        popup.title = "Своя тема";
-        popup.content = rewarded ? Lib.Div([], [
-            Lib.initEl("h3", [], "Спасибо за поддержку!"),
-            Lib.Div([], "Можете наслаждаться собственной темой."),
-            Lib.initEl("p", "settings-small", "(действует несколько дней)"),
-        ]) : Lib.Div([], [
-            Lib.initEl("h3", [], "К сожалению, что-то пошло не так"),
-            Lib.Div([], "Возможно у вас включен блокировщик рекламы."),
-            Lib.Div([], "Но на пару минут, вашу тему всё-равно оставим!"),
-        ]);
-        popup.open();
-    });
-});
+// Lib.addButtonListener("settings-customTheme-set", () =>
+// {
+// 	const now = new Date();
+// 	now.setDate(now.getDate() - 4);
+// 	now.setMinutes(now.getMinutes() + 3);
+// 	localStorage.setItem(Keys.lastAwr, now.toISOString());
+// 	showAdvRewarded(rewarded =>
+// 	{
+// 		if (rewarded)
+// 			localStorage.setItem(Keys.lastAwr, new Date().toISOString());
+// 		const popup = new Popup();
+// 		popup.cancelBtn = false;
+// 		popup.okBtn = false;
+// 		popup.title = "Своя тема";
+// 		popup.content = rewarded ? Lib.Div([], [
+// 			Lib.initEl("h3", [], "Спасибо за поддержку!"),
+// 			Lib.Div([], "Можете наслаждаться собственной темой."),
+// 			Lib.initEl("p", "settings-small", "(действует несколько дней)"),
+// 		]) : Lib.Div([], [
+// 			Lib.initEl("h3", [], "К сожалению, что-то пошло не так"),
+// 			Lib.Div([], "Возможно у вас включен блокировщик рекламы."),
+// 			Lib.Div([], "Но на пару минут, вашу тему всё-равно оставим!"),
+// 		]);
+// 		popup.open();
+// 	})
+// });
 export function checkCustomTheme() {
+    return;
     if (localStorage.getItem(Keys.customTheme) != "1")
         return;
     const lastAwr = new Date() - new Date(localStorage.getItem(Keys.lastAwr) || "");
@@ -114,12 +117,13 @@ function updateThemeColors(useCustom = true) {
     document.body.style.setProperty("--c-text", useCustom ? color_text.value : "");
     document.body.style.setProperty("--c-title", useCustom ? color_title.value : "");
 }
-adv.addEventListener("change", () => {
-    localStorage.setItem(Keys.lessAdv, adv.checked ? "1" : "0");
-    footer.style.maxHeight = adv.checked ? "55px" : "100px";
-});
-adv.checked = localStorage.getItem(Keys.lessAdv) == "1";
-footer.style.maxHeight = adv.checked ? "55px" : "100px";
+// adv.addEventListener("change", () =>
+// {
+// 	localStorage.setItem(Keys.lessAdv, adv.checked ? "1" : "0");
+// 	footer.style.maxHeight = adv.checked ? "55px" : "100px"
+// });
+// adv.checked = localStorage.getItem(Keys.lessAdv) == "1";
+// footer.style.maxHeight = adv.checked ? "55px" : "100px"
 Lib.addButtonListener("settings-export", () => {
     const data = {
         version: 1,
@@ -229,6 +233,7 @@ Lib.addButtonListener("settings-reset", async () => {
 export function isAnimDisabled() {
     return animDisabled;
 }
+regPage("settings", showSettings);
 export function showSettings(onSwitch = () => { }) {
     switchPage("settings", "Настройки", themes.common, onSwitch);
     data_collapse.checked = false;

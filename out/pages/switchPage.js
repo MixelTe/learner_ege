@@ -23,20 +23,29 @@ const subtitleEl = Lib.getEl("subtitle", HTMLHeadingElement);
 let curPage = "main";
 let prevPage = "main";
 let mouse = { x: 0, y: 0 };
+let disableAnimForRegPage = false;
 window.addEventListener("mousedown", e => mouse = { x: e.clientX, y: e.clientY });
 const instant = false;
 if (instant)
     console.warn("DEV: instant is enabled");
+let updateMainPage = () => { };
+export function setUpdateMainPage(f) {
+    updateMainPage = f;
+}
 export async function switchPage(page, title = "", theme = themes.common, onSwitch = () => { }, subtitle = "", dontPushState = false) {
-    const pageTitle = typeof page == "string" ? page : page.title;
+    const pagePath = typeof page == "string" ? page : page.page + "/" + page.subpath;
     page = typeof page == "string" ? page : page.page;
     if (curPage == page)
         return;
     const documentTitle = typeof title == "string" ? (title == "" ? "ЛЯРО" : "ЛЯРО | " + title) : "ЛЯРО" + title.title;
     title = typeof title == "string" ? title : title.display;
-    metrika_pageSwitch(prevPage, pageTitle, documentTitle);
-    prevPage = pageTitle;
-    if (instant || isAnimDisabled()) {
+    metrika_pageSwitch(prevPage, pagePath, documentTitle);
+    prevPage = pagePath;
+    if (page == "main")
+        updateMainPage();
+    const url = new URL(location.href);
+    url.hash = pagePath == "main" ? "" : pagePath;
+    if (instant || isAnimDisabled() || disableAnimForRegPage) {
         pages[curPage].classList.remove("open");
         curPage = page;
         titleEl.innerText = title;
@@ -48,9 +57,9 @@ export async function switchPage(page, title = "", theme = themes.common, onSwit
         checkCustomTheme();
         if (!dontPushState)
             if (history.state?.back)
-                history.replaceState({ page, title, theme, curSessionKey }, "");
+                history.replaceState({ page, title, theme, curSessionKey }, "", url);
             else
-                history.pushState({ page, title, theme, curSessionKey }, "");
+                history.pushState({ page, title, theme, curSessionKey }, "", url);
         document.title = documentTitle;
         if (currentTheme() != theme)
             setTheme(theme);
@@ -76,9 +85,9 @@ export async function switchPage(page, title = "", theme = themes.common, onSwit
     checkCustomTheme();
     if (!dontPushState)
         if (history.state?.back)
-            history.replaceState({ page, title, theme, curSessionKey }, "");
+            history.replaceState({ page, title, theme, curSessionKey }, "", url);
         else
-            history.pushState({ page, title, theme, curSessionKey }, "");
+            history.pushState({ page, title, theme, curSessionKey }, "", url);
     document.title = documentTitle;
     if (currentTheme() != theme) {
         setThemeColors(themeColors[theme]);
@@ -105,3 +114,16 @@ window.addEventListener("popstate", e => {
         }
     }
 });
+export function regPage(path, basicOpenFn, openFn) {
+    setTimeout(() => {
+        const hash = new URL(location.href).hash.slice(1);
+        if (hash.startsWith(path)) {
+            disableAnimForRegPage = true;
+            if (basicOpenFn)
+                basicOpenFn();
+            else if (hash.startsWith(path + "/"))
+                openFn?.(hash.slice((path + "/").length));
+            disableAnimForRegPage = false;
+        }
+    });
+}

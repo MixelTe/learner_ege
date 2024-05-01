@@ -126,7 +126,7 @@
 .sectionSelection-list button::after {
 	position: absolute;
 	top: 0.32em;
-	left: 0.3em;
+	left: 0.33em;
 	transition-property: opacity;
 	transition-duration: 100ms;
 	color: var(--c-title);

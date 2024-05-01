@@ -2,15 +2,18 @@ import { Sections } from "./data/sections.js";
 import { showDayStats } from "./pages/dayStats.js";
 import * as Lib from "./littleLib.js";
 import { showQlist } from "./pages/qlist.js";
-import { curSessionKey, switchPage } from "./pages/switchPage.js";
+import { curSessionKey, regPage, setUpdateMainPage, switchPage } from "./pages/switchPage.js";
 import { Tester } from "./tester.js";
 import { initThemes, themes } from "./themes.js";
 import { showAbout } from "./pages/about.js";
 import { isAnimDisabled, showSettings } from "./pages/settings.js";
 import { Trainer } from "./trainer.js";
+if ("serviceWorker" in navigator)
+    navigator.serviceWorker.register("./serviceworker.js");
 initThemes();
 const menu = Lib.get.div("menu");
 const btnAbout = Lib.get.button("btn-about");
+const statMarkers = [];
 let menuOpen = false;
 Lib.addButtonListener("menuBtn", () => {
     if (menuOpen) {
@@ -47,13 +50,14 @@ Lib.addButtonListener("btn-dayStats", () => showDayStats(closeMenu));
 Lib.addButtonListener("btn-about", () => showAbout(closeMenu));
 Lib.addButtonListener("btn-settings", () => showSettings(closeMenu));
 initMainPage();
+setUpdateMainPage(updateMainPage);
 // showStats();
 // showQlist();
 // showItemQs("", Sections[0].themes[15]);
 // showDayStats();
 // showAbout();
 // showSettings();
-// new Tester(Sections[2].themes[0]).start();
+// new Tester(Sections[0].themes[16]).start();
 async function initMainPage() {
     history.pushState({ page: "main", title: "", theme: themes.common, curSessionKey }, "");
     const sections = Lib.get.div("sections");
@@ -90,10 +94,27 @@ async function initMainPage() {
     const beforeload = document.getElementById("beforeload");
     if (beforeload) {
         beforeload.style.opacity = "0";
-        if (!isAnimDisabled())
-            await Lib.wait(500);
+        await Lib.wait(500);
         document.body.removeChild(beforeload);
     }
+}
+regPage("tester", null, themeId => {
+    for (const section of Sections)
+        for (const theme of section.themes)
+            if (theme.id == themeId)
+                new Tester(theme).start();
+});
+export function updateMainPage() {
+    const allStats = Trainer.getStatistics();
+    let i = 0;
+    for (const s of Sections)
+        for (const theme of s.themes) {
+            const stats = allStats.themes.find(v => v.id == theme.id);
+            const itemScore = stats ? Trainer.calcScore(stats, theme.count) : 0;
+            const circle = statMarkers[i++];
+            const maxV = 54;
+            circle.setAttribute("stroke-dasharray", `${itemScore * maxV} ${maxV * 2}`);
+        }
 }
 function createMarker(value) {
     const marker = document.createElementNS("http://www.w3.org/2000/svg", "svg");
@@ -109,5 +130,6 @@ function createMarker(value) {
     circle.setAttribute("transform", "rotate(-90 10 10)");
     const maxV = 54;
     circle.setAttribute("stroke-dasharray", `${value * maxV} ${maxV * 2}`);
+    statMarkers.push(circle);
     return marker;
 }

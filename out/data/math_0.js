@@ -24,9 +24,9 @@ export const data = [
     new TestItemSelfCheck(19, DBc("Площадь боковой поверхности правильной пирамиды"), createFormulas("S_{бок} = {P_{осн}h_{бок}}/{2}")),
     new TestItemSelfCheck(20, DBc("Объём призмы"), createFormulas("V = S_{осн}h")),
     new TestItemSelfCheck(21, DBc("Объём цилиндра"), createFormulas("V = 'Pr^2*h")),
-    new TestItemSelfCheck(22, DBc("Объём боковой поверхности цилиндра"), createFormulas("S_{бок} = 2'Pr*h")),
+    new TestItemSelfCheck(22, DBc("Площадь боковой поверхности цилиндра"), createFormulas("S_{бок} = 2'Pr*h")),
     new TestItemSelfCheck(23, DBc("Объём конуса"), createFormulas("V = {1}/{3}'Pr^2*h")),
-    new TestItemSelfCheck(24, DBc("Объём боковой поверхности конуса"), createFormulas("|S_{бок} = 'Pr*l", "l - образующая")),
+    new TestItemSelfCheck(24, DBc("Площадь боковой поверхности конуса"), createFormulas("|S_{бок} = 'Pr*l", "l - образующая")),
     new TestItemSelfCheck(25, DBc("Объём шара"), createFormulas("V = {4}/{3}'Pr^3")),
     new TestItemSelfCheck(26, DBc("Площадь поверхности сферы"), createFormulas("S = 4'Pr^2")),
 ];
