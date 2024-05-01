@@ -64,7 +64,12 @@ export async function showItemQs(sectionName: string, theme: Theme)
 	Lib.SetContent(qlistEl, Lib.Div("loading", "Загрузка заданий"));
 	qlistEl.classList.toggle("qlist_single", !!theme.onlyAnswerInQList);
 	const stats = Trainer.getStatistics().themes.find(v => v.id == theme.id);
-	const items = await theme.items();
+	const { items, success } = await theme.items();
+	if (!success)
+	{
+		Lib.SetContent(qlistEl, Lib.Div("loading-error", "Ошибка загрузки :("));
+		return;
+	}
 	qlistEl.innerHTML = "";
 	for (const item of items)
 	{

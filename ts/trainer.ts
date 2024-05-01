@@ -3,6 +3,7 @@ import { DayStatistics } from "./dayStatistics.js";
 import { getOrAdd, shuffledWithSeedAndWeights, sumStr } from "./functions.js";
 import { Keys } from "./keys.js";
 import * as Lib from "./littleLib.js";
+import type { TestItem } from "./tester.js";
 
 const Len = 15;
 const MaxHist = 5;
@@ -11,9 +12,11 @@ if (devSelectId >= -2) console.warn("DEV: devSelectId is enabled");
 
 export class Trainer
 {
-	public static async selectTasks(theme: Theme)
+	public static async selectTasks(theme: Theme): Promise<TestItem[] | null>
 	{
-		const items = await theme.items();
+		const { items, success } = await theme.items();
+		if (!success) return null;
+
 		if (devSelectId == -1)
 		{
 			const item = items.at(-1)

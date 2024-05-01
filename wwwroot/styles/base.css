@@ -325,3 +325,7 @@ body:not(.dark) .hideOnLight {
 		width: 10%;
 	}
 }
+
+.loading-error {
+	color: tomato;
+}

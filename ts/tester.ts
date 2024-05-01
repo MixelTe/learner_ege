@@ -24,7 +24,13 @@ export class Tester
 	{
 		switchPage({ page: "tester", subpath: this.theme.id }, { display: this.theme.name, title: " |> " + this.theme.name }, this.theme.color);
 		this.loading();
-		this.items = await Trainer.selectTasks(this.theme);
+		const items = await Trainer.selectTasks(this.theme);
+		if (!items)
+		{
+			this.loadingError();
+			return;
+		}
+		this.items = items;
 		this.next();
 		metrika_event("tester_start");
 	}
@@ -35,6 +41,10 @@ export class Tester
 		idEl.innerText = "";
 		inputEl.innerHTML = "";
 		Lib.SetContent(taskEl, Lib.Div("loading", "Загрузка заданий"));
+	}
+	private loadingError()
+	{
+		Lib.SetContent(taskEl, Lib.Div("loading-error", "Ошибка загрузки :("));
 	}
 
 	private next()
