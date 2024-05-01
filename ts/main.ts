@@ -10,6 +10,8 @@ import { showAbout } from "./pages/about.js";
 import { isAnimDisabled, showSettings } from "./pages/settings.js";
 import { Trainer } from "./trainer.js";
 
+if ("serviceWorker" in navigator)
+	navigator.serviceWorker.register("./serviceworker.js");
 initThemes();
 
 const menu = Lib.get.div("menu");
