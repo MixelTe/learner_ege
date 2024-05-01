@@ -28,7 +28,7 @@ export const data: TestItem[] = [
 	new TestItemSelfCheck(11, createFormulas("@{cos('a - 'b) = ?}"), createFormulas("@{cos('a - 'b) = cos'acos'b + sin'asin'b}")),
 	new TestItemSelfCheck(12, createFormulas("@{tg('a '+ 'b) = ?}"), createFormulas("@{tg('a '+ 'b) = {tg'a '+ tg'b}/{1 '- tg'atg'b}}")),
 	new TestItemSelfCheck(13, createFormulas("@{sin'a + sin'b = ?}"), createFormulas("@{sin'a + sin'b = 2sin{'a+'b}/{2}cos{'a-'b}/{2}}")),
-	new TestItemSelfCheck(14, createFormulas("@{sin'a - sin'b = ?}"), createFormulas("@{sin'a + sin'b = 2sin{'a-'b}/{2}cos{'a+'b}/{2}}")),
+	new TestItemSelfCheck(14, createFormulas("@{sin'a - sin'b = ?}"), createFormulas("@{sin'a - sin'b = 2sin{'a-'b}/{2}cos{'a+'b}/{2}}")),
 	new TestItemSelfCheck(15, createFormulas("@{cos'a + cos'b = ?}"), createFormulas("@{cos'a + cos'b = 2cos{'a+'b}/{2}cos{'a-'b}/{2}}")),
 	new TestItemSelfCheck(16, createFormulas("@{cos'a - cos'b = ?}"), createFormulas("@{cos'a - cos'b = -2sin{'a-'b}/{2}sin{'a+'b}/{2}}")),
 ];

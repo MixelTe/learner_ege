@@ -181,7 +181,7 @@ export const data: TestItem[] = [
 			)
 			.ul(
 				DB().textErr("с города"),
-				DB().textCor("в город").text(" (т.к. (от куда?) из города)"),
+				DB().textCor("из города").text(" (т.к. (куда?) в город)"),
 			)
 			.ul(
 				DB("Он вернётся ").textErr("из севера"),

@@ -9,7 +9,7 @@ export const Sections: Section[] = [
 			{ id: "ru_3", count: 42, name: "№3 Стили речи", color: themes.blue, items: getItemLoader("ru_3") },
 			{ id: "ru_4", count: 265, name: "№4 Ударения", color: themes.blue, items: getItemLoader("ru_4"), onlyAnswerInQList: true },
 			{ id: "ru_5", count: 144, name: "№5 Паронимы", color: themes.blue, items: getItemLoader("ru_5"), onlyAnswerInQList: true },
-			{ id: "ru_6", count: 69, name: "№6 Лексические нормы", color: themes.blue, items: getItemLoader("ru_6") },
+			{ id: "ru_6", count: 69, name: "№6 Лексические нормы", color: themes.blue, items: getItemLoader("ru_6"), disableRepeat: true },
 			{ id: "ru_7", count: 395, name: "№7 Формы слова", color: themes.blue, items: getItemLoader("ru_7"), onlyAnswerInQList: true },
 			{ id: "ru_8", count: 10, name: "№8 Грамматические нормы", color: themes.blue, items: getItemLoader("ru_8") },
 			{ id: "ru_9_1", count: 21, name: "№9 Правописание корней", color: themes.blue, items: getItemLoader("ru_9_1") },

@@ -448,7 +448,6 @@ export const data: TestItem[] = [
 	new TestItemWordChoice(443, "Персп[+е|и]ктива"),
 	new TestItemWordChoice(444, "П[+и|е]рамидальный"),
 	new TestItemWordChoice(445, "Пир[+а|о]мидальный"),
-	new TestItemWordChoice(446, "Пирам[+и|е]дальный"),
 	new TestItemWordChoice(447, "Пл[+а|о]гиат"),
 	new TestItemWordChoice(448, "Плаг[+и|е]ат"),
 	new TestItemWordChoice(449, "Пл[+е|и]яда"),

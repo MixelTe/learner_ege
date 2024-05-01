@@ -262,6 +262,7 @@ export function FB(text?: string)
  * ch| s
  * --|--
  * Z | ℤ
+ * N | ℕ
  * 0 | °
  * / | ⟂
  * \| | ∥
@@ -320,6 +321,7 @@ const formulaLetters: CustomLetters = {
 	"O": { ch: "Ω", cha: 0, chw: 0, dy: 0, vb: null, d: null },
 	"T": { ch: "η", cha: 0, chw: 0, dy: 0, vb: null, d: null },
 	"Z": { ch: "ℤ", cha: 0, chw: 0, dy: 0, vb: null, d: null },
+	"N": { ch: "ℕ", cha: 0, chw: 0, dy: 0, vb: null, d: null },
 	"0": { ch: "°", cha: 0, chw: 0, dy: 0, vb: null, d: null },
 	"/": { ch: "⟂", cha: 0, chw: 0, dy: 0, vb: null, d: null },
 	"|": { ch: "∥", cha: 0, chw: 0, dy: 0, vb: null, d: null },
@@ -362,6 +364,7 @@ const replaceLetters: CustomLetters = {
  * ch| s
  * --|--
  * Z | ℤ
+ * N | ℕ
  * 0 | °
  * / | ⟂
  * \| | ∥
