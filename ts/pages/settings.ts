@@ -20,8 +20,8 @@ const color_back2 = Lib.getInput("settings-color-back2");
 const color_text = Lib.getInput("settings-color-text");
 const color_title = Lib.getInput("settings-color-title");
 
-const footer = Lib.getEl("footer", HTMLElement);
-const adv = Lib.getInput("settings-adv");
+// const footer = Lib.getEl("footer", HTMLElement);
+// const adv = Lib.getInput("settings-adv");
 
 const data_collapse = Lib.getInput("settings-data-collapse");
 
@@ -80,37 +80,38 @@ if (localStorage.getItem(Keys.customTheme) == "1")
 	updateThemeColors();
 }
 
-Lib.addButtonListener("settings-customTheme-set", () =>
-{
-	const now = new Date();
-	now.setDate(now.getDate() - 4);
-	now.setMinutes(now.getMinutes() + 3);
-	localStorage.setItem(Keys.lastAwr, now.toISOString());
+// Lib.addButtonListener("settings-customTheme-set", () =>
+// {
+// 	const now = new Date();
+// 	now.setDate(now.getDate() - 4);
+// 	now.setMinutes(now.getMinutes() + 3);
+// 	localStorage.setItem(Keys.lastAwr, now.toISOString());
 
-	showAdvRewarded(rewarded =>
-	{
-		if (rewarded)
-			localStorage.setItem(Keys.lastAwr, new Date().toISOString());
+// 	showAdvRewarded(rewarded =>
+// 	{
+// 		if (rewarded)
+// 			localStorage.setItem(Keys.lastAwr, new Date().toISOString());
 
-		const popup = new Popup();
-		popup.cancelBtn = false;
-		popup.okBtn = false;
-		popup.title = "Своя тема";
-		popup.content = rewarded ? Lib.Div([], [
-			Lib.initEl("h3", [], "Спасибо за поддержку!"),
-			Lib.Div([], "Можете наслаждаться собственной темой."),
-			Lib.initEl("p", "settings-small", "(действует несколько дней)"),
-		]) : Lib.Div([], [
-			Lib.initEl("h3", [], "К сожалению, что-то пошло не так"),
-			Lib.Div([], "Возможно у вас включен блокировщик рекламы."),
-			Lib.Div([], "Но на пару минут, вашу тему всё-равно оставим!"),
-		]);
-		popup.open();
-	})
-});
+// 		const popup = new Popup();
+// 		popup.cancelBtn = false;
+// 		popup.okBtn = false;
+// 		popup.title = "Своя тема";
+// 		popup.content = rewarded ? Lib.Div([], [
+// 			Lib.initEl("h3", [], "Спасибо за поддержку!"),
+// 			Lib.Div([], "Можете наслаждаться собственной темой."),
+// 			Lib.initEl("p", "settings-small", "(действует несколько дней)"),
+// 		]) : Lib.Div([], [
+// 			Lib.initEl("h3", [], "К сожалению, что-то пошло не так"),
+// 			Lib.Div([], "Возможно у вас включен блокировщик рекламы."),
+// 			Lib.Div([], "Но на пару минут, вашу тему всё-равно оставим!"),
+// 		]);
+// 		popup.open();
+// 	})
+// });
 
 export function checkCustomTheme()
 {
+	return;
 	if (localStorage.getItem(Keys.customTheme) != "1") return;
 
 	const lastAwr = new Date() as any - (new Date(localStorage.getItem(Keys.lastAwr) || "") as any) as number;
@@ -145,13 +146,13 @@ function updateThemeColors(useCustom = true)
 	document.body.style.setProperty("--c-title", useCustom ? color_title.value : "");
 }
 
-adv.addEventListener("change", () =>
-{
-	localStorage.setItem(Keys.lessAdv, adv.checked ? "1" : "0");
-	footer.style.maxHeight = adv.checked ? "55px" : "100px"
-});
-adv.checked = localStorage.getItem(Keys.lessAdv) == "1";
-footer.style.maxHeight = adv.checked ? "55px" : "100px"
+// adv.addEventListener("change", () =>
+// {
+// 	localStorage.setItem(Keys.lessAdv, adv.checked ? "1" : "0");
+// 	footer.style.maxHeight = adv.checked ? "55px" : "100px"
+// });
+// adv.checked = localStorage.getItem(Keys.lessAdv) == "1";
+// footer.style.maxHeight = adv.checked ? "55px" : "100px"
 
 Lib.addButtonListener("settings-export", () =>
 {

@@ -104,6 +104,7 @@ function tryCall(f: () => void, ef?: () => void)
 let bottomAdvEnabled = false;
 export function enableBottomAdv()
 {
+	return;
 	if (bottomAdvEnabled) return;
 	bottomAdvEnabled = true;
 
@@ -123,6 +124,7 @@ export function enableBottomAdv()
 
 export function showAdvFullscreen(onClose?: () => void)
 {
+	return;
 	tryCall(() =>
 	{
 		if (Ya.Context.AdvManager.getPlatform() === "desktop")

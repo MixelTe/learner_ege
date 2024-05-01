@@ -41,8 +41,8 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" />
 	<script src="out/main.js" type="module"></script>
 	<!-- Yandex.RTB -->
-	<script>window.yaContextCb = window.yaContextCb || []</script>
-	<script src="https://yandex.ru/ads/system/context.js" async></script>
+	<!-- <script>window.yaContextCb = window.yaContextCb || []</script> -->
+	<!-- <script src="https://yandex.ru/ads/system/context.js" async></script> -->
 </head>
 
 <body>
@@ -230,7 +230,10 @@
 	</div>
 	<div class="page" id="p-about">
 		<h2>ЛЯРО</h2>
-		<h3>Приложение для повторения теории</h3>
+		<div>
+			<h3>Приложение для повторения теории</h3>
+			<small>Автор не гарантирует корректность предоставляемого материала</small>
+		</div>
 		<div class="aboutAuthor">
 			<h4>Автор:</h4>
 			<div class="aboutAuthor-corners">
@@ -289,11 +292,11 @@
 			<span class="checkbox-mark"></span>
 			<span>Анимации</span>
 		</label>
-		<label class="checkbox">
+		<!-- <label class="checkbox">
 			<input type="checkbox" id="settings-adv">
 			<span class="checkbox-mark"></span>
 			<span>Меньше рекламы</span>
-		</label>
+		</label> -->
 		<div class="settings-customTheme">
 			<label class="checkbox">
 				<input type="checkbox" id="settings-customTheme">
@@ -313,9 +316,9 @@
 						<span>Текст 2</span>
 						<input type="color" id="settings-color-title">
 					</div>
-					<button id="settings-customTheme-set">
+					<!-- <button id="settings-customTheme-set">
 						Установить за рекламу
-					</button>
+					</button> -->
 				</div>
 			</div>
 		</div>
