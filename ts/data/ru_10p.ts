@@ -956,7 +956,7 @@ export const data: TestItem[] = [
 	new TestItemWordChoice(952, "с[+ъ|ь| ]ёжился"),
 	new TestItemWordChoice(953, "с[+ъ|ь| ]ёжиться"),
 	new TestItemWordChoice(954, "с[+ъ|ь| ]ёмка"),
-	new TestItemWordChoice(955, "сверх[+|ъ] нициативный"),
+	new TestItemWordChoice(955, "сверх[+|ъ]инициативный"),
 	new TestItemWordChoice(956, "сверх[+|ъ]бдительный"),
 	new TestItemWordChoice(957, "сверх[+и|е|ы]дейный"),
 	new TestItemWordChoice(958, "сверх[+и|е|ы]дея"),
