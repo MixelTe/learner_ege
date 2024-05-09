@@ -112,7 +112,7 @@ export function updateMainPage() {
             const stats = allStats.themes.find(v => v.id == theme.id);
             const itemScore = stats ? Trainer.calcScore(stats, theme.count) : 0;
             const circle = statMarkers[i++];
-            const maxV = 54;
+            const maxV = 57;
             circle.setAttribute("stroke-dasharray", `${itemScore * maxV} ${maxV * 2}`);
         }
 }
@@ -128,7 +128,7 @@ function createMarker(value) {
     circle.setAttribute("stroke-width", "1.5");
     circle.setAttribute("fill", "transparent");
     circle.setAttribute("transform", "rotate(-90 10 10)");
-    const maxV = 54;
+    const maxV = 57;
     circle.setAttribute("stroke-dasharray", `${value * maxV} ${maxV * 2}`);
     statMarkers.push(circle);
     return marker;
