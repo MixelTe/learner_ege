@@ -237,7 +237,7 @@ export const data: TestItem[] = [
 	new TestItemWordChoice(233, "брюзж[+а|у]щий"),
 	new TestItemWordChoice(234, "будораж[+и|е]вший (воображение)"),
 	new TestItemWordChoice(235, "бушу[+ю|я]щая (стихия)"),
-	new TestItemWordChoice(236, "ве[+я|ю]вший (ветерок)"),
+	new TestItemWordChoice(236, "ве[+я|и]вший (ветерок)"),
 	new TestItemWordChoice(237, "ве[+ю|я]щий (прохладой)"),
 	new TestItemWordChoice(238, "ве[+ю|я]щий (с юга)"),
 	new TestItemWordChoice(239, "вер[+и|е]вший"),
