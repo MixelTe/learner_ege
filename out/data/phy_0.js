@@ -47,7 +47,7 @@ export const data = [
     new TestItemSelfCheck(40, DBc("основное уравнение МКТ"), createFormulas("|p = {1}/{3}m_0{#{'v}}^2n = {2}/{3}#En", "p - давление", "n - концентрация", "m_0 - масса молекулы", "\\#E - средняя кинетическая энергия")),
     new TestItemSelfCheck(41, DBc("Концентрация молекул"), createFormulas("n = {N}/{V}")),
     new TestItemSelfCheck(42, DBc("Абсолютная температура"), createFormulas("T = t'0 + 273К")),
-    new TestItemSelfCheck(43, DBc("Связь температуры газа со средней кинетической энергией"), createFormulas("|#E = {2}/{3}kT", "k - постоянная Больцмана")),
+    new TestItemSelfCheck(43, DBc("Связь температуры газа со средней кинетической энергией"), createFormulas("|#E = {3}/{2}kT", "k - постоянная Больцмана")),
     new TestItemSelfCheck(44, DBc("Закон Авогадро"), createFormulas("|p = nkT", "p - давление", "n - концентрация", "k - постоянная Больцмана")),
     new TestItemSelfCheck(45, DBc("Уравнение Менделеева-Клапейрона"), createFormulas("pV = {m}/{'m}RT", "{pV}/{T} = const")),
     new TestItemSelfCheck(46, DBc("Внутренняя энергии одноатомного идеального газа"), createFormulas("U = {3}/{2}'nRT")),
