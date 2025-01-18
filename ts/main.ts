@@ -2,7 +2,6 @@ import { Sections } from "./data/sections.js";
 import { showDayStats } from "./pages/dayStats.js";
 import * as Lib from "./littleLib.js";
 import { showItemQs, showQlist } from "./pages/qlist.js";
-import { showStats } from "./pages/stats.js";
 import { curSessionKey, regPage, setUpdateMainPage, switchPage } from "./pages/switchPage.js";
 import { Tester } from "./tester.js";
 import { initThemes, themes } from "./themes.js";
@@ -15,7 +14,7 @@ if ("serviceWorker" in navigator)
 initThemes();
 
 const menu = Lib.get.div("menu");
-const btnAbout = Lib.get.button("btn-about");
+const btnAbout = Lib.get.el("btn-about", HTMLAnchorElement);
 const statMarkers: SVGCircleElement[] = [];
 
 let menuOpen = false;
@@ -55,12 +54,11 @@ function closeMenu(instant = true)
 	}
 	menu.classList.remove("open");
 }
-Lib.addButtonListener("btn-index", () => switchPage("main", "", themes.common, closeMenu));
-// Lib.addButtonListener("btn-stats", () => showStats(closeMenu));
-Lib.addButtonListener("btn-qlist", () => showQlist(closeMenu));
-Lib.addButtonListener("btn-dayStats", () => showDayStats(closeMenu));
-Lib.addButtonListener("btn-about", () => showAbout(closeMenu));
-Lib.addButtonListener("btn-settings", () => showSettings(closeMenu));
+Lib.addLinkListener("btn-index", () => switchPage("main", "", themes.common, closeMenu));
+Lib.addLinkListener("btn-qlist", () => showQlist(closeMenu));
+Lib.addLinkListener("btn-dayStats", () => showDayStats(closeMenu));
+Lib.addLinkListener("btn-about", () => showAbout(closeMenu));
+Lib.addLinkListener("btn-settings", () => showSettings(closeMenu));
 
 initMainPage();
 setUpdateMainPage(updateMainPage);
@@ -94,10 +92,10 @@ async function initMainPage()
 		{
 			const stats = allStats.themes.find(v => v.id == theme.id);
 			const itemScore = stats ? Trainer.calcScore(stats, theme.count) : 0;
-			themes.appendChild(Lib.Button([], [
+			themes.appendChild(Lib.A([], [
 				theme.name,
 				createMarker(itemScore),
-			], () =>
+			], `#tester/${theme.id}`, () =>
 			{
 				sections.querySelectorAll("input").forEach(inp => inp.checked = false);
 				new Tester(theme).start();
@@ -105,7 +103,7 @@ async function initMainPage()
 		}
 		if (s.themes.length == 0)
 		{
-			themes.appendChild(Lib.Button([], "В разработке"));
+			themes.appendChild(Lib.A([], "В разработке"));
 		}
 		sections.appendChild(section);
 	}
